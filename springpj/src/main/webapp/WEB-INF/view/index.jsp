@@ -12,6 +12,12 @@
 <button id="modify">Modify</button>
 <button id="write">Write</button>
 
+<script>
+	$("#mypage").click(function(){
+		location.href = "member/mypage";
+	});
+</script>
+
 <%@ include file="common/footer.jsp"%>
 
 
