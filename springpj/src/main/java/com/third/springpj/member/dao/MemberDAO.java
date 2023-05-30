@@ -64,14 +64,10 @@ public interface MemberDAO {
 	//SQL012 - 탈퇴회원 아이디에 해당하는 포트폴리오 전체를 삭제
 	@Delete("delete from tbl_portfolio_base where mId = #{mId}")
 	int deletePortFolios(String mId);
-	
-	//SQL026 - base 테이블에서 게시글 번호 가져오기
-	@Select("select pNum from tbl_portfolio_base where mId = #{mId} order by pNum desc limit 1")
-	int findpNum(String mId);
 
 	 //SQL0027  일치하는 메일로 아이디찾기
-	   @Select ("select mId from tbl_pmember where mEmail = #{mEmail}")
-	   String emailFind(String mEmail);
+	 @Select ("select mId from tbl_pmember where mEmail = #{mEmail}")
+	 String emailFind(String mEmail);
 	
 
 }
