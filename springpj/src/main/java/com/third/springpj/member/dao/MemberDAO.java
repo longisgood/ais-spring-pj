@@ -27,9 +27,9 @@ public interface MemberDAO {
 	@Select("select count(*) from tbl_pmember where mEmail = #{mEmail}")
 	int findEmail(String mEmail);
 	
-	//SQL004 - 아이디로 비밀번호 찾기
-	@Select("select mPw from tbl_pmember where mId = #{mId}")
-	String findPw(String mId);
+	//SQL004 - 아이디랑 이메일로 비밀번호 찾기
+	@Select("select mPw from tbl_pmember where mId = #{user.mId} and mEmail = #{user.mEmail}")
+	String findPw(MemberVO user);
 	
 	//SQL005 - 멤버 아이디로 해당 아이디가 들어간 모든  기본 포트폴리오 찾기
 	@Select("select * from tbl_portfolio_base where mId = #{mId} order by pNum desc ")
@@ -65,8 +65,13 @@ public interface MemberDAO {
 	@Delete("delete from tbl_portfolio_base where mId = #{mId}")
 	int deletePortFolios(String mId);
 	
-	
 	//SQL026 - base 테이블에서 게시글 번호 가져오기
 	@Select("select pNum from tbl_portfolio_base where mId = #{mId} order by pNum desc limit 1")
 	int findpNum(String mId);
+
+	 //SQL0027  일치하는 메일로 아이디찾기
+	   @Select ("select mId from tbl_pmember where mEmail = #{mEmail}")
+	   String emailFind(String mEmail);
+	
+
 }
