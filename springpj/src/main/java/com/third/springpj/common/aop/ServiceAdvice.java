@@ -5,15 +5,17 @@ import java.util.Arrays;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
 
+@Component
 @Aspect
 @Slf4j
 public class ServiceAdvice {
 
-	@Around("execution(* net.koreate.greatescape.*.service.*.*(..))")
+	@Around("execution(* com.third.springpj.*.service.*.*(..))")
 	public Object checkService(ProceedingJoinPoint pjp) throws Throwable {
 		// 전처리
 		log.info("================= START =================");
