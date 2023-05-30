@@ -2,6 +2,7 @@ package com.third.springpj.member.vo;
 
 import lombok.Data;
 
+
 @Data
 public class MemberVO {
 

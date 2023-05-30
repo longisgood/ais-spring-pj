@@ -12,12 +12,13 @@ import com.third.springpj.portfolio.vo.FullPortFolioDTO;
 @Service
 public class MemberServiceImpl implements MemberService {
 	
+	@Autowired
 	private MemberDAO md;
 
 	@Override
 	public MemberVO loginCheck(MemberVO user) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return md.findMember(user);
 	}
 
 	@Override
