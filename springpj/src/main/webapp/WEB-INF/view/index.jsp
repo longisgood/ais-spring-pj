@@ -3,7 +3,14 @@
 <%@ include file="common/header.jsp"%>
 
 
-<h1>wa</h1>
+<button id="find">Find</button>
+<button id="info">Info</button>
+<button id="join">Join</button>
+<button id="login">Login</button>
+<button id="mypage">My Page</button>
+<button id="detail">Detail</button>
+<button id="modify">Modify</button>
+<button id="write">Write</button>
 
 <%@ include file="common/footer.jsp"%>
 
