@@ -65,4 +65,8 @@ public interface MemberDAO {
 	@Delete("delete from tbl_portfolio_base where mId = #{mId}")
 	int deletePortFolios(String mId);
 	
+	
+	//SQL026 - base 테이블에서 게시글 번호 가져오기
+	@Select("select pNum from tbl_portfolio_base where mId = #{mId} order by pNum desc limit 1")
+	int findpNum(String mId);
 }
