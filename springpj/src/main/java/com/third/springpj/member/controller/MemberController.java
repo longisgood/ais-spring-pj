@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.third.springpj.member.service.MemberService;
 import com.third.springpj.member.vo.MemberVO;
 
-import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("member")
