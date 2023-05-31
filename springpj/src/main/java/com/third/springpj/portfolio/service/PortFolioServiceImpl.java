@@ -39,8 +39,9 @@ public class PortFolioServiceImpl implements PortFolioService {
 
 	@Override
 	public FullPortFolioDTO detailPort(int pNum) {
-		// TODO Auto-generated method stub
-		return null;
+		FullPortFolioDTO result = new FullPortFolioDTO(pd.findBase(pNum),pd.findDetail(pNum));
+		
+		return result;
 	}
 
 	@Override
