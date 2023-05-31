@@ -17,20 +17,18 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO loginCheck(MemberVO user) {
-		
 		return md.findMember(user);
 	}
 
 	@Override
 	public int idCheck(String mId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return md.findId(mId);
 	}
 
 	@Override
 	public int emailCheck(String mEmail) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return md.findEmail(mEmail);
 	}
 
 	@Override
@@ -53,7 +51,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void joinMember(MemberVO user) {
-		// TODO Auto-generated method stub
+		md.registerMember(user);
 		
 	}
 

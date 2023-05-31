@@ -19,6 +19,18 @@ public class PortFolioController {
 	
 	@Autowired
 	private PortFolioService ps;
+	
+	
+	@GetMapping("detail")
+	public String Detail(Model model, FullPortFolioDTO port) {
+		
+		port = ps.detailPort(2);
+		
+		model.addAttribute("port",port);
+		
+		
+		return "portfolio/detail";
+	}
 
 	// 작성페이지 이동
 	@GetMapping("/write")

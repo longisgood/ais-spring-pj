@@ -1,38 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../common/header.jsp" %>
-<section class="container">
-	<label for="pTitle">Title:</label>
-      <input type="text" id="pTitle" name="pTitle" placeholder="Enter title label.."  readonly>
+<%@ include file="../common/header.jsp"%>
+<link href="${contextPath}/css/detail.css" rel="stylesheet"
+	type="text/css">
+<div class="portfolio-item">
+	<p>
+		제목 <input type="text" value="${port.PTitle}" readonly>
+	</p>
+	<p>
+		아이디 <input type="text" value="${port.MId}" readonly>
+	</p>
+	<p>
+		직업 <input type="text" value="${port.PJob}" readonly>
+	</p>
+	<p>
+		회사 <input type="text" value="${port.PComp}" readonly>
+	</p>
+	<p>
+		학력 <input type="text" value="${port.PEdu}" readonly>
+	</p>
+	<p>
+		경력 <input type="text" value="${port.PCareer}" readonly>
+	</p>
+	<p>
+		자격증 <input type="text" value="${port.PLisence}" readonly>
+	</p>
+	<div class="details">
+		<p>
+			기술<input type="text" value="${port.PSkill}" readonly>
+		</p>
+		<p>
+			상세내용<input type="text" value="${port.PText}" readonly>
+		</p>
+		<p>
+			파일 <input type="text" value="${port.PFile}" readonly>
+		</p>
+	</div>
+</div>
 
-      <label for="pJob">Job:</label>
-      <input type="text" id="pJob" name="pJob" placeholder="Enter job label.."  readonly>
+<button onclick="printPage()" hidden>인쇄</button>
 
-      <label for="pComp">Company:</label>
-      <input type="text" id="pComp" name="pComp" placeholder="Enter company label.."  readonly>
-
-      <label for="pEdu">Education:</label>
-      <input type="text" id="pEdu" name="pEdu" placeholder="Enter education label.."  readonly>
-		
-      <label for="pCareer">Career:</label>
-      <input type="text" id="pCareer" name="pCareer" placeholder="Enter career label.."  readonly>
-      
-      <label for="viewCheck">View Check</label>
-      <input type="checkbox" id="viewCheck" name="viewCheck">
-
-      <label for="pLicense">License:</label>
-      <input type="text" id="pLicense" name="pLicense" placeholder="Enter license label.."  readonly>
-
-      <label for="pSkill">Skill:</label>
-      <input type="text" id="pSkill" name="pSkill" placeholder="Enter skill label.."  readonly>
-
-      <label for="pText">Text:</label>
-      <textarea id="pText" name="pText" placeholder="Enter text..."  readonly></textarea>s
-</section>
 <script>
-	var msg = "${message}";
-	if(msg != null){
-		alert(msg);
+	//페이지 출력하기
+
+	function printPage() {
+		window.print();
 	}
 </script>
-<%@ include file="../common/footer.jsp" %>
+<%@ include file="../common/footer.jsp"%>
+
+
