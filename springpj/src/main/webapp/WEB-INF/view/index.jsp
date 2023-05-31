@@ -16,6 +16,9 @@
 	$("#mypage").click(function(){
 		location.href = "member/mypage";
 	});
+	$("#write").click(function(){
+		location.href = "portfolio/write";
+	});
 </script>
 
 <%@ include file="common/footer.jsp"%>
