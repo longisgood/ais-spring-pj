@@ -12,6 +12,7 @@
 <button id="modify">Modify</button>
 <button id="write">Write</button>
 
+
 <script>
 	$("#mypage").click(function(){
 		location.href = "member/mypage";
@@ -19,6 +20,10 @@
 	$("#write").click(function(){
 		location.href = "portfolio/write";
 	});
+	$("#login").click(function(){
+		location.href = "member/login";
+	});
+	
 </script>
 
 <%@ include file="common/footer.jsp"%>

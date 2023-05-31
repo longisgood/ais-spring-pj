@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.third.springpj.member.service.MemberService;
 import com.third.springpj.member.vo.MemberVO;
 
+
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,6 +22,12 @@ public class MemberController {
 
 	@Autowired
 	private MemberService ms;
+	
+	@GetMapping("/login")
+	public String Login()  {
+		return "member/login";
+	}
+	
 
 	@GetMapping("/mypage")
 	public String MyPage(Model model, MemberVO user) {

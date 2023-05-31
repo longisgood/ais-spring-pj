@@ -17,6 +17,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO loginCheck(MemberVO user) {
+
 		return md.findMember(user);
 	}
 

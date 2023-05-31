@@ -46,10 +46,11 @@ public class PortFolioController {
 	@PostMapping("/regi")
 	public String Writing(FullPortFolioDTO portfolio, HttpSession session,MemberVO loginMember,Model model) {
 		loginMember = (MemberVO) session.getAttribute("userInfo");
+		
 		portfolio.setMId(loginMember.getMId());
 		ps.writePortFolio(portfolio);
 		
-		String msg = "작성하신 글 등록이 완료되었습니다.";
+		String msg = "作成した文書が登録しました。";
 		
 		model.addAttribute("message",msg);
 		
