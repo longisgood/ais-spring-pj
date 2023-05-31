@@ -16,7 +16,7 @@ public interface PortFolioDAO {
 	
 	 //SQL013 - portfolio base 테이블에 값 입력
 	@Insert("insert into tbl_portfolio_base(pTitle,mId,pJob,pComp,pEdu,pCareer,pLisence,viewCheck) "
-			+ "values(#{pTitle},#{mId},#{pJob},#{pComp},#{pEdu},#{pCareer},#{pLisence}),#{viewCheck}")
+			+ "values(#{pTitle},#{mId},#{pJob},#{pComp},#{pEdu},#{pCareer},#{pLisence},#{viewCheck})")
 	void insertPortBase(PortFolioBaseVO base);
 	
 	//SQL014 - portfolio detail 테이블에 값 입력

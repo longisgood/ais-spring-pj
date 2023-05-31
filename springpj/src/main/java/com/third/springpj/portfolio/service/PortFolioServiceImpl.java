@@ -8,16 +8,26 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.third.springpj.portfolio.dao.PortFolioDAO;
 import com.third.springpj.portfolio.vo.FullPortFolioDTO;
+import com.third.springpj.portfolio.vo.PortFolioBaseVO;
+import com.third.springpj.portfolio.vo.PortFolioDetailVO;
 
 
 @Service
 public class PortFolioServiceImpl implements PortFolioService {
 
+	@Autowired
 	private PortFolioDAO  pd;
 	
 	@Override
 	public void writePortFolio(FullPortFolioDTO port) {
-		// TODO Auto-generated method stub
+		PortFolioBaseVO base = port.seperBase(port);
+		pd.insertPortBase(base);
+		
+		int  pNum = pd.findpNum(base.getMId());
+		
+		PortFolioDetailVO detail = port.seperDetail(port);
+		detail.setPNum(pNum);
+		pd.insertPortDetail(detail);
 		
 	}
 

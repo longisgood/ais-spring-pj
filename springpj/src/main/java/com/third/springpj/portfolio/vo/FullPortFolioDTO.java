@@ -11,4 +11,25 @@ public class FullPortFolioDTO extends PortFolioBaseVO {
 	private String pSkill;
 	private String pText;
 	private String pFile;
+	
+	public PortFolioBaseVO seperBase(FullPortFolioDTO p) {
+		PortFolioBaseVO base = new PortFolioBaseVO();
+		base.setPTitle(p.getPTitle());
+		base.setMId(p.getMId());
+		base.setPCareer(p.getPCareer());
+		base.setPComp(p.getPComp());
+		base.setPEdu(p.getPEdu());
+		base.setPJob(p.getPJob());
+		base.setPLisence(p.getPLisence());
+		base.setViewCheck(p.getViewCheck());
+		
+		return base;
+	}
+	
+	public PortFolioDetailVO seperDetail(FullPortFolioDTO p) {
+		PortFolioDetailVO detail = new PortFolioDetailVO();
+		detail.setPSkill(pSkill);
+		detail.setPText(pText);
+		return detail;
+	}
 }
