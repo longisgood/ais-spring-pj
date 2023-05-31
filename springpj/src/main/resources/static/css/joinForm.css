@@ -1,0 +1,101 @@
+@charset "UTF-8";
+.select:hover .options {
+	display: block;
+}
+
+.options li {
+	padding: 10px;
+	cursor: pointer;
+}
+
+.options li:hover {
+	background-color: lightgray;
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+	text-decoration: none;
+	font-family: sans-serif;
+}
+
+.visibility {
+	visibility: hidden
+}
+
+.textForm {
+	border-bottom: 2px solid #adadad;
+	padding: 10px 10px;
+}
+
+.id, .pw, .name, .nickname, .email, .age {
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 16px;
+	height: 25px;
+	background: none;
+}
+
+.btn {
+	position: relative;
+	left: 40%;
+	transform: translateX(-50%);
+	margin-bottom: 40px;
+	width: 80%;
+	height: 40px;
+	background: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec);
+	background-position: left;
+	background-size: 200%;
+	color: white;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+	transition: 0.4s;
+	display: inline;
+}
+
+.btn:hover {
+	background-position: right;
+}
+
+.button {
+	position: absolute;
+	width: 80px;
+	height: 35px;
+	margin: auto 0;
+	border-radius: 3px;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+	transition: 0.4s;
+	display: inline;
+}
+
+.profile-pic {
+	border: 1px solid black;
+	display: 1px solid block;
+	width: 150px;
+	height: 200px;
+	border-radius: 50%;
+	position: relative;
+}
+
+.img-input-container {
+	display: flex;
+}
+
+.img-input-container img {
+	margin-right: 10px;
+}
+
+.input-row {
+	flex-direction: column;
+	width: 90%;
+	border-bottom: 2px solid #adadad;
+	padding: 10px
+	
+}
+
+

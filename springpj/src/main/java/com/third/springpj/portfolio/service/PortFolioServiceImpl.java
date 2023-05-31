@@ -8,11 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.third.springpj.portfolio.dao.PortFolioDAO;
 import com.third.springpj.portfolio.vo.FullPortFolioDTO;
+import com.third.springpj.portfolio.vo.PortFolioBaseVO;
 
 
 @Service
 public class PortFolioServiceImpl implements PortFolioService {
-
+	
+	@Autowired
 	private PortFolioDAO  pd;
 	
 	@Override
@@ -29,8 +31,9 @@ public class PortFolioServiceImpl implements PortFolioService {
 
 	@Override
 	public FullPortFolioDTO detailPort(int pNum) {
-		// TODO Auto-generated method stub
-		return null;
+		FullPortFolioDTO result = new FullPortFolioDTO(pd.findBase(pNum),pd.findDetail(pNum));
+		
+		return result;
 	}
 
 	@Override
