@@ -28,7 +28,7 @@ public interface MemberService {
 	
 	// 로그인한 멤버 포트폴리오 게시물 불러오기
 	// ログインしたユーザーのポートポートフォリオ出力
-	List<FullPortFolioDTO> getPortFolioList(String mId);
+	List<PortFolioBaseVO> getPortFolioList(String mId);
 	
 	// 마이페이지에서 로그인한 멤버 포트폴리오 삭제하기
 	// マイページでポートフォリオ削除
