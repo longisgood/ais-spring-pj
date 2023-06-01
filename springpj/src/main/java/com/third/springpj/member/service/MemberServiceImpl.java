@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.third.springpj.member.dao.MemberDAO;
 import com.third.springpj.member.vo.MemberVO;
 import com.third.springpj.portfolio.vo.FullPortFolioDTO;
+import com.third.springpj.portfolio.vo.PortFolioBaseVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -39,9 +40,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<FullPortFolioDTO> getPortFolioList(String mId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PortFolioBaseVO> getPortFolioList(String mId) {
+		return md.findBasePortFolio(mId);
 	}
 
 	@Override

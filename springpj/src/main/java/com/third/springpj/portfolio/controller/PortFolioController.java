@@ -1,5 +1,6 @@
 package com.third.springpj.portfolio.controller;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +23,10 @@ public class PortFolioController {
 	
 	
 	@GetMapping("detail")
-	public String Detail(Model model, FullPortFolioDTO port) {
+	public String Detail(Model model,FullPortFolioDTO port) {
+		FullPortFolioDTO result = ps.detailPort(port.getPNum());
 		
-		port = ps.detailPort(2);
-		
-		model.addAttribute("port",port);
+		model.addAttribute("port",result);
 		
 		
 		return "portfolio/detail";
@@ -54,6 +54,6 @@ public class PortFolioController {
 		
 		model.addAttribute("message",msg);
 		
-		return "portfolio/detail";
+		return "member/mypage";
 	}
 }

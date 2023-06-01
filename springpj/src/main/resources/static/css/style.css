@@ -5,6 +5,10 @@ body {
       padding: 0;
       font-family: Arial, sans-serif;
     }
+    
+ section{
+ 	text-align: center;
+ }
 
     .navbar {
       background-color: green;
@@ -53,4 +57,56 @@ body {
 #modify:hover,
 #write:hover {
   background-color: darkgreen;
+}
+
+h1 {
+  color: darkgreen;
+}
+
+form {
+  margin: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 300px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+  margin-top: 5px;
+}
+
+#submitBtn {
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#submitBtn:hover {
+  background-color: darkgreen;
+  border-radius: 1px solid;
+}
+
+
+
+#group button {
+  background-color: limegreen;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+#group span {
+  color: limegreen;
+  cursor: pointer;
 }

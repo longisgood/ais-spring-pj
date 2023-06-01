@@ -1,5 +1,7 @@
 package com.third.springpj.member.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.springpj.member.service.MemberService;
 import com.third.springpj.member.vo.MemberVO;
-
+import com.third.springpj.portfolio.vo.PortFolioBaseVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -30,11 +32,11 @@ public class MemberController {
 	
 
 	@GetMapping("/mypage")
-	public String MyPage(Model model, MemberVO user) {
-		user.setMId("asia");
-		user.setMPw("1234");
-		MemberVO result = ms.loginCheck(user);
-		model.addAttribute("member", result);
+	public String MyPage(HttpSession session,MemberVO loginMember,Model model) {
+		loginMember = (MemberVO) session.getAttribute("userInfo");
+		List<PortFolioBaseVO> result = ms.getPortFolioList(loginMember.getMId());
+		model.addAttribute("portfolio",result);
+		
 		return "member/mypage";
 	}
 
