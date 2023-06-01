@@ -64,14 +64,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int modifyMember(MemberVO loginMember) {
-		// TODO Auto-generated method stub
-		return 0;
+		return md.updateMember(loginMember);
 	}
 
 	@Override
 	public int withdrawMember(int mNum) {
-		// TODO Auto-generated method stub
-		return 0;
+		return md.changeWithdraw(mNum);
 	}
 
 

@@ -28,6 +28,7 @@ public class MemberController {
 	private MemberService ms;
 
 	@GetMapping("/login")
+
 	public String Login() {
 
 		return "member/login";
@@ -92,12 +93,15 @@ public class MemberController {
 	  }
 	
 
+
 	@GetMapping("/mypage")
-	public String MyPage(HttpSession session,MemberVO loginMember,Model model) {
+	public String MyPage(HttpSession session, MemberVO loginMember, Model model) {
 		loginMember = (MemberVO) session.getAttribute("userInfo");
-		List<PortFolioBaseVO> result = ms.getPortFolioList(loginMember.getMId());
-		model.addAttribute("portfolio",result);
 		
+		System.out.println(loginMember.toString());
+		List<PortFolioBaseVO> result = ms.getPortFolioList(loginMember.getMId());
+		model.addAttribute("portfolio", result);
+
 		return "member/mypage";
 	}
 
@@ -114,9 +118,8 @@ public class MemberController {
 
 		return ms.idCheck(mId);
 	}
-	
-	
-	//입력한 이메일로 가입한 유저가 있는지 확인
+
+	// 입력한 이메일로 가입한 유저가 있는지 확인
 	@PostMapping("/emailCheck")
 	public @ResponseBody int emailCheck(String mEmail) {
 		return ms.emailCheck(mEmail);
@@ -125,22 +128,19 @@ public class MemberController {
 	// 회원 가입
 	@PostMapping("/join")
 	public String join(MemberVO user) {
-		
+
 		log.info("회원가입 실행");
-			
+
 		ms.joinMember(user);
 		return "redirect:./login";
 	}
-	
-	
-	
 
 	// 수정페이지로 이동
 	@GetMapping("info")
 	public String Info(Model model, MemberVO user) {
 		log.debug("수정 페이지로 이동");
 
-		user.setMId("asdasd");
+		user.setMId("aaaa");
 		user.setMPw("asdasda");
 		MemberVO result = ms.loginCheck(user);
 
@@ -148,15 +148,21 @@ public class MemberController {
 
 		return "member/info";
 	}
-	
-	
+
 	// 회원정보 수정
-		@PostMapping("info")
-		public String Info(MemberVO user) {
-			ms.modifyMember(user);
+	@PostMapping("info")
+	public String Info(MemberVO user) {
+		ms.modifyMember(user);
 
+		return "redirect:../";
+	}
 
-			return "redirect:../";
-		}
+	@PostMapping("delete")
+	public @ResponseBody int Delete(int mNum) {
+
+		System.out.println(mNum);
+
+		return ms.withdrawMember(mNum);
+	}
 
 }
