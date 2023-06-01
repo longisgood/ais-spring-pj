@@ -34,7 +34,7 @@
 					placeholder="이름 입력">
 			</div>
 			<div class="input-row">
-				<input type="number" class="age" id="mAge" name="age"
+				<input type="number" class="age" id="mAge" name="mAge"
 					placeholder="나이" min="0" maxlength="3"
 					oninput="numberMaxLength(this);">
 			</div>
@@ -55,10 +55,11 @@
 					<input type="button" class="button" value="코드 확인">
 				</div>
 			</div>
-		<input type="submit" class="btn" value="J O I N"> <input
-			type="hidden" id="id_cd" value="F"> <input type="hidden"
-			id="pw_cd" value="F"> <input type="hidden" id="code_cd"
-			value="F">
+			<div class ="button-container">
+		<input type="submit" class="btn" value="J O I N"> <input type="button" class="btn" value="B A C K" onclick="goBack();">
+			</div>
+		<input type="hidden" id="id_cd" value="F"> 
+		<input type="hidden" id="pw_cd" value="F"> <input type="hidden" id="code_cd" value="F">
 	</form>
 </section>
 <script>
@@ -194,10 +195,10 @@
 			alert('비밀번호를 올바르게 입력해주세요.');
 			return false;
 		}
-		if (code_cd.value == 'F') {
+		/* if (code_cd.value == 'F') {
 			alert('코드를 올바르게 입력해주세요');
 			return false;
-		}
+		} */
 
 	}
 
@@ -245,5 +246,9 @@
 					},
 				});
 	}
+	
+	function goBack() {
+        window.history.back();
+    }
 </script>
 <%@ include file="../common/footer.jsp"%>
