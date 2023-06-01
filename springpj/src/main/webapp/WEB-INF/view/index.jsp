@@ -15,6 +15,12 @@
 <script>
 	$("#mypage").click(function(){
 		location.href = "member/mypage";
+	}); 
+	$("#login").click(function(){
+		location.href = "member/login";
+	});
+	$("#find").click(function(){
+		location.href = "member/find";
 	});
 </script>
 
