@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.third.springpj.member.dao.MemberDAO;
 import com.third.springpj.member.vo.MemberVO;
 import com.third.springpj.portfolio.vo.FullPortFolioDTO;
+import com.third.springpj.portfolio.vo.PortFolioBaseVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -17,20 +18,19 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO loginCheck(MemberVO user) {
-		
+
 		return md.findMember(user);
 	}
 
 	@Override
 	public int idCheck(String mId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return md.findId(mId);
 	}
 
 	@Override
 	public int emailCheck(String mEmail) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return md.findEmail(mEmail);
 	}
 
 	@Override
@@ -40,9 +40,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<FullPortFolioDTO> getPortFolioList(String mId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PortFolioBaseVO> getPortFolioList(String mId) {
+		return md.findBasePortFolio(mId);
 	}
 
 	@Override
@@ -53,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void joinMember(MemberVO user) {
-		// TODO Auto-generated method stub
+		md.registerMember(user);
 		
 	}
 

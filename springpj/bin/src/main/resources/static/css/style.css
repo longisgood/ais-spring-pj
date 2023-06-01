@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      background-color: green;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 50px;
+      height: auto;
+    }
+
+    .login-btn {
+      padding: 10px 20px;
+      background-color: white;
+      color: green;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+#find,
+#info,
+#join,
+#login,
+#mypage,
+#detail,
+#modify,
+#write {
+  background-color: limegreen;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+}
+
+#find:hover,
+#info:hover,
+#join:hover,
+#login:hover,
+#mypage:hover,
+#detail:hover,
+#modify:hover,
+#write:hover {
+  background-color: darkgreen;
+}
