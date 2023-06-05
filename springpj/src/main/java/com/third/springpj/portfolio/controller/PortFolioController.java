@@ -23,12 +23,8 @@ public class PortFolioController {
 	
 	
 	@GetMapping("detail")
-	public String Detail(Model model,FullPortFolioDTO port) {
-		FullPortFolioDTO result = ps.detailPort(port.getPNum());
-		
-		model.addAttribute("port",result);
-		
-		
+	public String Detail(Model model, int pNum) {
+			model.addAttribute("port",ps.detailPort(pNum));
 		return "portfolio/detail";
 	}
 
