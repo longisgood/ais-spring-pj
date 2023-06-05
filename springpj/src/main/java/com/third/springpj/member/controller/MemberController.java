@@ -22,7 +22,6 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 @Controller
 @RequestMapping("member")
@@ -34,13 +33,24 @@ public class MemberController {
 	@Autowired
 	JavaMailSender mailSender;
 
-	@GetMapping("/login")
 
-	public String Login() {
+	// 로그인로고버튼 클릭시 로그인 페이지 이동
+	@GetMapping("/login-btn")
+	public String loginbtn() {
 
 		return "member/login";
 	}
 
+	// 로그아웃버튼 클릭시 메인 페이지 이동
+	@GetMapping("/logout-btn")
+	public String logout(HttpSession session) {
+		session.invalidate();
+
+		return "redirect:/";
+
+	}
+
+	// 로그인확인버튼 클릭시 수행
 	@PostMapping("/loginCheck")
 	public String loginCheck(Model model, MemberVO user, HttpSession session) {
 
@@ -54,11 +64,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/find")
-	public String find() {
-		return "member/find";
-	}
-
+//   아이디 찾기 화면으로이동
 	@GetMapping("/find1")
 	public String find1(Model model) {
 
@@ -68,6 +74,7 @@ public class MemberController {
 
 	}
 
+// 비번 찾기 화면으로이동
 	@GetMapping("/find2")
 	public String find2(Model model) {
 
@@ -75,31 +82,21 @@ public class MemberController {
 		return "member/find";
 	}
 
-	@GetMapping("/idFind")
-	public String idfind() {
-		return "member/find";
+	// 아이디 찾기 부분에서 찾기버튼 클릭시 이메일 체크
+	@PostMapping("/eMailFind")
+	public @ResponseBody String eMailFind(String mEmail) {
+
+		int result = ms.emailCheck(mEmail);
+		if (result == 0) {
+			String message = "해당 정보는 일치하지 않습니다";
+			return message;
+		} else {
+			return ms.eMailFind(mEmail);
+		}
 
 	}
 
-	@GetMapping("/pwFind")
-	public String pwfind() {
-		return "member/find";
-	}
-
-	@GetMapping("/login-btn")
-	public String loginbtn() {
-		return "member/login";
-	}
 	
-	  @GetMapping("/logout-btn")
-	  public String logout(HttpSession session) {
-		  session.invalidate();
-		  
-		  return "redirect:/"; 
-		  
-	  }
-	
-
 
 	@GetMapping("/mypage")
 	public String MyPage(HttpSession session, MemberVO loginMember, Model model) {
@@ -164,9 +161,7 @@ public class MemberController {
 		return "redirect:../";
 	}
 
-			return "redirect:../";
-		}
-		
+
 		//인증메일 전송
 		@GetMapping("/checkEmail")
 		@ResponseBody
@@ -188,6 +183,7 @@ public class MemberController {
 			return code;
 		}
 
+  
 	@PostMapping("delete")
 	public @ResponseBody int Delete(int mNum) {
 
@@ -196,3 +192,4 @@ public class MemberController {
 		return ms.withdrawMember(mNum);
 	}
 }
+

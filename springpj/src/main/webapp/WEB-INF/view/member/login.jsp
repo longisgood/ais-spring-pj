@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jsp" %>
+
 <section class="container">
 <div class="container">
     <h1>로그인</h1>
@@ -18,11 +19,13 @@
       </div>
     </form>
     <div class="buttons">
-		<button id = "join" name = "join">회원가입</button>
-		<button id = "idFind" name = "idFind">아이디찾기</button>
-		<button id = "pwFind" name = "pwFind">비밀번호찾기</button>
+      <button id = "join" name = "join">회원가입</button>
+      <button id = "idFind" name = "idFind">아이디찾기</button>
+      <button id = "pwFind" name = "pwFind">비밀번호찾기</button>
       
     </div>
+   
+ 
   </div>
 
 </section>
@@ -31,8 +34,8 @@
 //로그인 실패시
 var msg = '${message}';
 if(msg != ''){
-	alert(msg);
-	
+   alert(msg);
+   
 }
 //아이디찾기 버튼 클릭시
 $("#idFind").click(function(){

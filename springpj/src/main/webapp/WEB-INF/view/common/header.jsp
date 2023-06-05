@@ -51,10 +51,12 @@
 	</div>
 	<script>
 		/* 로그인버튼을 누르면 어디서든 로그인 페이지로 올 수 있음 */
+		/* ログインボタンを押せばどこにでもログインページに移動ができる */
 		$("#login-btn").click(function() {
-			location.href = "member/login";
+			location.href = "${contextPath}/member/login-btn";
 		});
-		//로그아웃 버튼을 누르면 어디서든 메인페이지로 돌아감
+		//로그아웃 버튼을 누르면 어디서든 메인페이지로 돌아감 
+		/* ログアウトボタンを押せばどこにでもメインページに移動ができる  */
 		   $("#logout-btn").click(function() {
 			   location.href = "${contextPath}/member/logout-btn"
 		    });

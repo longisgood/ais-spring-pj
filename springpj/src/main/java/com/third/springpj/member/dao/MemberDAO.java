@@ -80,7 +80,7 @@ public interface MemberDAO {
 	 //SQL0027  일치하는 메일로 아이디찾기
  	 //Emailでユーザー照会
 	 @Select ("select mId from tbl_pmember where mEmail = #{mEmail}")
-	 String emailFind(String mEmail);
+	 String eMailFind(String mEmail);
 	
 
 }

@@ -71,7 +71,10 @@ public class MemberServiceImpl implements MemberService {
 	public int withdrawMember(int mNum) {
 		return md.changeWithdraw(mNum);
 	}
-
-
+	@Override
+	public String eMailFind(String mEmail) {
+		// TODO Auto-generated method stub
+		return md.eMailFind(mEmail);
+	}
 
 }
