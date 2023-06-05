@@ -56,4 +56,11 @@ public class PortFolioController {
 		
 		return "member/mypage";
 	}
+	
+	
+	@PostMapping("/modify")
+	public String Modify() {
+			ps.modifyPort(null);
+		return "portfolio/detail";
+	}
 }

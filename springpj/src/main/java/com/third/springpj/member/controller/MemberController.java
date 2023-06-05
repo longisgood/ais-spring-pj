@@ -3,17 +3,21 @@ package com.third.springpj.member.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.springpj.member.service.MemberService;
 import com.third.springpj.member.vo.MemberVO;
 import com.third.springpj.portfolio.vo.PortFolioBaseVO;
 
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +28,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService ms;
+	
+	@Autowired
+	JavaMailSender mailSender;
 	
 	@GetMapping("/login")
 	public String Login()  {
@@ -96,6 +103,27 @@ public class MemberController {
 
 
 			return "redirect:../";
+		}
+		
+		//인증메일 전송
+		@GetMapping("/checkEmail")
+		@ResponseBody
+		public String sendMail(@RequestParam("member_email") String email)throws Exception {
+			System.out.println(email);
+			String code = "";
+			for(int i=0; i<5;i++) {
+				code +=(int)(Math.random()*10);
+			}
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message,"UTF-8");
+			helper.setFrom("yukitozx7@gmail.com");
+			helper.setTo(email);
+			helper.setSubject("인증 메일입니다.");
+			helper.setText("인증 코드 : <h3>["+code+"]</h3>",true);
+			mailSender.send(message);
+			System.out.println("발신 완료");
+			return code;
 		}
 
 }
