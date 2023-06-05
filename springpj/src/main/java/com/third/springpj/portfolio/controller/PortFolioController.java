@@ -23,12 +23,8 @@ public class PortFolioController {
 	
 	
 	@GetMapping("detail")
-	public String Detail(Model model,FullPortFolioDTO port) {
-		FullPortFolioDTO result = ps.detailPort(port.getPNum());
-		
-		model.addAttribute("port",result);
-		
-		
+	public String Detail(Model model, int pNum) {
+			model.addAttribute("port",ps.detailPort(pNum));
 		return "portfolio/detail";
 	}
 
@@ -55,5 +51,12 @@ public class PortFolioController {
 		model.addAttribute("message",msg);
 		
 		return "member/mypage";
+	}
+	
+	
+	@PostMapping("/modify")
+	public String Modify() {
+			ps.modifyPort(null);
+		return "portfolio/detail";
 	}
 }

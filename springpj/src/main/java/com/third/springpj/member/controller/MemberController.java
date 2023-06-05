@@ -3,18 +3,22 @@ package com.third.springpj.member.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.springpj.member.service.MemberService;
 import com.third.springpj.member.vo.MemberVO;
 import com.third.springpj.portfolio.vo.PortFolioBaseVO;
 
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,10 +29,15 @@ public class MemberController {
 
 	@Autowired
 	private MemberService ms;
+  
+	@Autowired
+	JavaMailSender mailSender;
+
 
 	// 로그인로고버튼 클릭시 로그인 페이지 이동
 	@GetMapping("/login-btn")
 	public String loginbtn() {
+
 		return "member/login";
 	}
 
@@ -87,29 +96,12 @@ public class MemberController {
 
 	}
 
-	// 비밀번호 찾기 페이지에서 아이디 체크 버튼 클릭시 아이디유무 확인
-	/*
-	 * @PostMapping("/mId") public @ResponseBody String pwfindId(String mId) {
-	 * 
-	 * int result = ms.idCheck(mId);
-	 * 
-	 * if (result == 1) { String message = "確認しました."; return message; } else {
-	 * String message = "確認ができません"; return message; } }
-	 */
 	
-	
-	// 비밀번호 찾기 페이지에서 이메일 체크 버튼 클릭시 이메일 체크
-	/*
-	 * @PostMapping("/mEmail") public String pwfindeMail(String mEmail) { int result
-	 * = ms.emailCheck(mEmail);
-	 * 
-	 * if (result == 1) { String message = "確認しました."; return message; } else {
-	 * String message = "確認ができません"; return message; } }
-	 */
+
 	@GetMapping("/mypage")
 	public String MyPage(HttpSession session, MemberVO loginMember, Model model) {
 		loginMember = (MemberVO) session.getAttribute("userInfo");
-
+		
 		System.out.println(loginMember.toString());
 		List<PortFolioBaseVO> result = ms.getPortFolioList(loginMember.getMId());
 		model.addAttribute("portfolio", result);
@@ -169,6 +161,29 @@ public class MemberController {
 		return "redirect:../";
 	}
 
+
+		//인증메일 전송
+		@GetMapping("/checkEmail")
+		@ResponseBody
+		public String sendMail(@RequestParam("member_email") String email)throws Exception {
+			System.out.println(email);
+			String code = "";
+			for(int i=0; i<5;i++) {
+				code +=(int)(Math.random()*10);
+			}
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message,"UTF-8");
+			helper.setFrom("yukitozx7@gmail.com");
+			helper.setTo(email);
+			helper.setSubject("인증 메일입니다.");
+			helper.setText("인증 코드 : <h3>["+code+"]</h3>",true);
+			mailSender.send(message);
+			System.out.println("발신 완료");
+			return code;
+		}
+
+  
 	@PostMapping("delete")
 	public @ResponseBody int Delete(int mNum) {
 
@@ -176,5 +191,5 @@ public class MemberController {
 
 		return ms.withdrawMember(mNum);
 	}
-
 }
+

@@ -4,13 +4,12 @@
 <link href="${contextPath}/css/joinForm.css" rel="stylesheet"
 	type="text/css">
 <section>
-	<form action="info" method="POST" onsubmit="return checkValues()">
+	<form action="info" method="POST" onsubmit="return checkValues();">
 		<div hidden>
-			<img id="preview" class="profile-pic" src="" onclick="fileInput()">
+			<img id="preview" class="profile-pic" src="" onclick="fileInput();">
 			<input type="file" name="imageFile" id="profile-pic" accept="image/*"
 				onchange="previewImage(event)" hidden>
 		</div>
-
 		<div class="input-row" id="idcheck">
 			<input type="text" class="id" id="mId" name="mId" value="${member.MId}"
 				readonly> 
@@ -32,7 +31,7 @@
 				placeholder="이름 입력">
 		</div>
 		<div class="input-row">
-			<input type="number" class="age" id="mAge" name="age" value="${member.MAge}"
+			<input type="number" class="age" id="mAge" name="mAge" value="${member.MAge}"
 				placeholder="나이" min="0" maxlength="3"
 				oninput="numberMaxLength(this);">
 		</div>
@@ -53,9 +52,13 @@
 				<input type="button" class="button" value="코드 확인">
 			</div>
 		</div>
-		<input type="submit" class="btn" value="UPDATE"> <input
-			type="hidden" id="pw_cd" value="F"> <input type="hidden"
-			id="code_cd" value="F">
+		<input type="submit" class="btn" value="UPDATE"> 
+		<input type="button" class="btn" value="DELETE" onclick = "deleteuser();">
+		<input type="button" class="btn" value="B A C K" onclick = "goBack()">
+		<input type="hidden" id="pw_cd" value="F"> 
+		<input type="hidden" id="code_cd" value="F"> 
+		<input type="hidden" id = "mNum" name = "mNum" value="${member.MNum}"> 
+		
 	</form>
 
 </section>
@@ -73,11 +76,13 @@ $(document).ready(() => {
 	}
 	
 })
+	let mNum = document.getElementById('mNum');
 	let mPw = document.getElementById('mPw');
 	let mPwCheck = document.getElementById('mPwCheck');
 	let pwcheck = document.getElementById('pwcheck');
 	let mName = document.getElementById('mName');
 	let age = document.getElementById('mAge');
+	let gender = document.getElementById('mGender');
 	let pw_cd = document.getElementById('pw_cd');// 비밀번호 일치 여부
 	let code_cd = document.getElementById('code_cd'); //이메일 송신코드 일치 여부
 
@@ -200,5 +205,32 @@ $(document).ready(() => {
 	function showCode() {
 		document.getElementById("codecheck").style.visibility = "visible";
 	}
+	
+	//뒤로가기
+	function goBack() {
+        window.history.back();
+    }
+	
+	//탈퇴기능
+	function deleteuser() {
+       let check = confirm("정말로 삭제하시겠습니까?");
+       
+       if(check){
+    		$.ajax({
+				type : "POST",
+				url : "delete",
+				data : {
+					"mNum" : mNum.value
+				},
+				success : function(data) {
+					if (data != 0) {
+						location.href = "/";
+					} else {
+						alert("탈퇴에 실패");
+					}
+				}
+			});
+       }
+    }
 </script>
 <%@ include file="../common/footer.jsp"%>
