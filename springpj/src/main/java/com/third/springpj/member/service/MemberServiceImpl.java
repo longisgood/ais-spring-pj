@@ -73,7 +73,10 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-
+	@Override
+	public String eMailFind(String mEmail) {
+		// TODO Auto-generated method stub
+		return md.eMailFind(mEmail);
+	}
 
 }

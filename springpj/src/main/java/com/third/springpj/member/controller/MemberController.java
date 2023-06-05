@@ -18,7 +18,6 @@ import com.third.springpj.portfolio.vo.PortFolioBaseVO;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 @Controller
 @RequestMapping("member")
@@ -27,12 +26,22 @@ public class MemberController {
 	@Autowired
 	private MemberService ms;
 
-	@GetMapping("/login")
-	public String Login() {
-
+	// 로그인로고버튼 클릭시 로그인 페이지 이동
+	@GetMapping("/login-btn")
+	public String loginbtn() {
 		return "member/login";
 	}
 
+	// 로그아웃버튼 클릭시 메인 페이지 이동
+	@GetMapping("/logout-btn")
+	public String logout(HttpSession session) {
+		session.invalidate();
+
+		return "redirect:/";
+
+	}
+
+	// 로그인확인버튼 클릭시 수행
 	@PostMapping("/loginCheck")
 	public String loginCheck(Model model, MemberVO user, HttpSession session) {
 
@@ -46,11 +55,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/find")
-	public String find() {
-		return "member/find";
-	}
-
+//   아이디 찾기 화면으로이동
 	@GetMapping("/find1")
 	public String find1(Model model) {
 
@@ -60,6 +65,7 @@ public class MemberController {
 
 	}
 
+// 비번 찾기 화면으로이동
 	@GetMapping("/find2")
 	public String find2(Model model) {
 
@@ -67,37 +73,47 @@ public class MemberController {
 		return "member/find";
 	}
 
-	@GetMapping("/idFind")
-	public String idfind() {
-		return "member/find";
+	// 아이디 찾기 부분에서 찾기버튼 클릭시 이메일 체크
+	@PostMapping("/eMailFind")
+	public @ResponseBody String eMailFind(String mEmail) {
+
+		int result = ms.emailCheck(mEmail);
+		if (result == 0) {
+			String message = "해당 정보는 일치하지 않습니다";
+			return message;
+		} else {
+			return ms.eMailFind(mEmail);
+		}
 
 	}
 
-	@GetMapping("/pwFind")
-	public String pwfind() {
-		return "member/find";
-	}
-
-	@GetMapping("/login-btn")
-	public String loginbtn() {
-		return "member/login";
-	}
+	// 비밀번호 찾기 페이지에서 아이디 체크 버튼 클릭시 아이디유무 확인
+	/*
+	 * @PostMapping("/mId") public @ResponseBody String pwfindId(String mId) {
+	 * 
+	 * int result = ms.idCheck(mId);
+	 * 
+	 * if (result == 1) { String message = "確認しました."; return message; } else {
+	 * String message = "確認ができません"; return message; } }
+	 */
 	
-	  @GetMapping("/logout-btn")
-	  public String logout(HttpSession session) {
-		  session.invalidate();
-		  
-		  return "redirect:/"; 
-		  
-	  }
 	
-
+	// 비밀번호 찾기 페이지에서 이메일 체크 버튼 클릭시 이메일 체크
+	/*
+	 * @PostMapping("/mEmail") public String pwfindeMail(String mEmail) { int result
+	 * = ms.emailCheck(mEmail);
+	 * 
+	 * if (result == 1) { String message = "確認しました."; return message; } else {
+	 * String message = "確認ができません"; return message; } }
+	 */
 	@GetMapping("/mypage")
-	public String MyPage(HttpSession session,MemberVO loginMember,Model model) {
+	public String MyPage(HttpSession session, MemberVO loginMember, Model model) {
 		loginMember = (MemberVO) session.getAttribute("userInfo");
+
+		System.out.println(loginMember.toString());
 		List<PortFolioBaseVO> result = ms.getPortFolioList(loginMember.getMId());
-		model.addAttribute("portfolio",result);
-		
+		model.addAttribute("portfolio", result);
+
 		return "member/mypage";
 	}
 
@@ -114,9 +130,8 @@ public class MemberController {
 
 		return ms.idCheck(mId);
 	}
-	
-	
-	//입력한 이메일로 가입한 유저가 있는지 확인
+
+	// 입력한 이메일로 가입한 유저가 있는지 확인
 	@PostMapping("/emailCheck")
 	public @ResponseBody int emailCheck(String mEmail) {
 		return ms.emailCheck(mEmail);
@@ -125,22 +140,19 @@ public class MemberController {
 	// 회원 가입
 	@PostMapping("/join")
 	public String join(MemberVO user) {
-		
+
 		log.info("회원가입 실행");
-			
+
 		ms.joinMember(user);
 		return "redirect:./login";
 	}
-	
-	
-	
 
 	// 수정페이지로 이동
 	@GetMapping("info")
 	public String Info(Model model, MemberVO user) {
 		log.debug("수정 페이지로 이동");
 
-		user.setMId("asdasd");
+		user.setMId("aaaa");
 		user.setMPw("asdasda");
 		MemberVO result = ms.loginCheck(user);
 
@@ -148,15 +160,21 @@ public class MemberController {
 
 		return "member/info";
 	}
-	
-	
+
 	// 회원정보 수정
-		@PostMapping("info")
-		public String Info(MemberVO user) {
-			ms.modifyMember(user);
+	@PostMapping("info")
+	public String Info(MemberVO user) {
+		ms.modifyMember(user);
 
+		return "redirect:../";
+	}
 
-			return "redirect:../";
-		}
+	@PostMapping("delete")
+	public @ResponseBody int Delete(int mNum) {
+
+		System.out.println(mNum);
+
+		return ms.withdrawMember(mNum);
+	}
 
 }
