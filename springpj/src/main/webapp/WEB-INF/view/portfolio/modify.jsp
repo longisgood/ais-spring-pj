@@ -11,8 +11,9 @@
 		<div>
 			<label for="pTitle">Title:</label> <input type="text" id="pTitle"
 				name="pTitle" placeholder="Enter title label.."
-				value="${portfolio.PTitle}" required> <label for="viewCheck">View
-				Check</label> <input type="checkbox" id="viewCheck" name="viewCheck">
+				value="${portfolio.PTitle}" required> <label
+				for="viewCheck">View Check</label> <input type="checkbox"
+				id="viewCheck" name="viewCheck"  value="N">
 		</div>
 		<div>
 			<label for="pJob">Job:</label> <input type="text" id="pJob"
@@ -57,10 +58,7 @@
 		var titleCheck = $("#pTitle").val();
 		if($("#viewCheck").is(":checked") == true){
 			$("#viewCheck").val("Y");
-	    }else{
-	    	$("#viewCheck").val("N");
 	    }
-		var viewCheck = $("#viewCheck").val();
 		
 		if(titleCheck == null || titleCheck == undefined || titleCheck == ""){
 			alert('タイトルを入力してください。')

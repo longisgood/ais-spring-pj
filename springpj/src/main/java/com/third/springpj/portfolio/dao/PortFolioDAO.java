@@ -42,7 +42,7 @@ public interface PortFolioDAO {
 	// SQL018 - 해당하는 portfolio_base 테이블에 입력 받은 자료 업데이트
 	//　該当する基本ポートフォリオ内容修正
 	@Update("update tbl_portfolio_base set pTitle = #{pTitle}, pJob = #{pJob}, pComp = #{pComp}, pEdu = #{pEdu}, "
-			+ "pCareer = #{pCareer}, pLisence = #{pLisence}, viewCheck = #{viewCheck} where pNum = #{pNum}")
+			+ "pCareer = #{pCareer}, pLisence = #{pLisence}, viewCheck = #{viewCheck} where pNum = #{pNum} and mId = #{mId}")
 	void updateBase(PortFolioBaseVO base);
 
 	// SQL019 - 해당하는 portfolio_detail 테이블에 입력받은 자료 업데이트

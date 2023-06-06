@@ -62,7 +62,9 @@ public class PortFolioController {
 	}
 
 	@PostMapping("/change")
-	public String Change(FullPortFolioDTO portfolio, Model model,RedirectAttributes rttr) {
+	public String Change(FullPortFolioDTO portfolio, Model model,RedirectAttributes rttr,HttpSession session) {
+		MemberVO loginMember = (MemberVO)session.getAttribute("userInfo");
+		portfolio.setMId(loginMember.getMId());
 		ps.modifyPort(portfolio);
 		String message = "修正できました。";
 		rttr.addFlashAttribute("msg",message);

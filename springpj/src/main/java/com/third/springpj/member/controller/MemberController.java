@@ -103,7 +103,6 @@ public class MemberController {
 	public String MyPage(HttpSession session, MemberVO loginMember, Model model) {
 		loginMember = (MemberVO) session.getAttribute("userInfo");
 		
-		System.out.println(loginMember.toString());
 		List<PortFolioBaseVO> result = ms.getPortFolioList(loginMember.getMId());
 		model.addAttribute("portfolio", result);
 
