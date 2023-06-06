@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ include file="../common/header.jsp"%>
+<link href="${contextPath}/css/mypage.css" rel="stylesheet"
+	type="text/css">
 <section class="container">
 	<div>
 		<c:forEach items="${portfolio}" var="item">
@@ -15,6 +18,7 @@
 			</form>
 		</c:forEach>
 	</div>
+	<h1>${userInfo.MName}様、おはようございます！</h1>
 </section>
 <script>
 	var msg = "${msg}"
