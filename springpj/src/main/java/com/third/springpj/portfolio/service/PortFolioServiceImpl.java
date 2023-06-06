@@ -11,24 +11,23 @@ import com.third.springpj.portfolio.vo.FullPortFolioDTO;
 import com.third.springpj.portfolio.vo.PortFolioBaseVO;
 import com.third.springpj.portfolio.vo.PortFolioDetailVO;
 
-
 @Service
 public class PortFolioServiceImpl implements PortFolioService {
 
 	@Autowired
-	private PortFolioDAO  pd;
-	
+	private PortFolioDAO pd;
+
 	@Override
 	public void writePortFolio(FullPortFolioDTO port) {
 		PortFolioBaseVO base = port.seperBase(port);
 		pd.insertPortBase(base);
-		
-		int  pNum = pd.findpNum(base.getMId());
-		
+
+		int pNum = pd.findpNum(base.getMId());
+
 		PortFolioDetailVO detail = port.seperDetail(port);
 		detail.setPNum(pNum);
 		pd.insertPortDetail(detail);
-		
+
 	}
 
 	@Override
@@ -39,23 +38,24 @@ public class PortFolioServiceImpl implements PortFolioService {
 
 	@Override
 	public FullPortFolioDTO detailPort(int pNum) {
-		FullPortFolioDTO result = new FullPortFolioDTO(pd.findBase(pNum),pd.findDetail(pNum));
-		
+		FullPortFolioDTO result = new FullPortFolioDTO(pd.findBase(pNum), pd.findDetail(pNum));
+
 		return result;
 	}
 
 	@Override
-	public int modifyPort(FullPortFolioDTO port) {
-		
-		return 0;
+	public void modifyPort(FullPortFolioDTO port) {
+		PortFolioBaseVO base = port.seperBase(port);
+		PortFolioDetailVO detail = port.seperDetail(port);
+		pd.updateBase(base);
+		pd.updateDetail(detail);
 	}
 
 	@Override
 	@Transactional
 	public int deletePort(int pNum) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = pd.deletePortFolio(pNum);
+		return result;
 	}
 
-	
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jsp"%>
+<link href="${contextPath}/css/write.css" rel="stylesheet"
+	type="text/css">
 <section class="container">
 	<h1>작성 페이지</h1>
 	<form id="regi" action="regi" method="post">
@@ -8,7 +10,7 @@
 			<label for="pTitle">Title:</label> <input type="text" id="pTitle"
 				name="pTitle" placeholder="Enter title label.." required> <label
 				for="viewCheck">View Check</label> <input type="checkbox"
-				id="viewCheck" name="viewCheck">
+				id="viewCheck" name="viewCheck"  value="N">
 		</div>
 		<div>
 			<label for="pJob">Job:</label> <input type="text" id="pJob"
@@ -38,12 +40,37 @@
 		</div>
 	</form>
 	<button id="submitBtn" type="submit">Write</button>
+	<button id="backBtn">Back</button>
 </section>
 <script>
-	$("#submitBtn").click(function() {
-		var viewCheck = $("#viewCheck").checked ? "N" : "Y"
-		$("#viewCheck").val(viewCheck);
+
+
+
+
+$("#backBtn").click(function(){
+	history.go(-1);
+}); 
+
+
+$("#submitBtn").click(function(){
+	var titleCheck = $("#pTitle").val();
+	if($("#viewCheck").is(":checked") == true){
+		$("#viewCheck").val("Y");
+    }
+	
+	if(titleCheck == null || titleCheck == undefined || titleCheck == ""){
+		alert('タイトルを入力してください。')
+		$('#pTitle').focus(); 
+		return;
+	}
+	
+	var check = confirm("このまま進めてもいいですか？");
+	
+	if(check == true){
 		$("#regi").submit();
-	});
+	}else{
+		alert('もう一度確認してください。')
+	}
+})
 </script>
 <%@ include file="../common/footer.jsp"%>

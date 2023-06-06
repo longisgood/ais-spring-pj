@@ -21,7 +21,7 @@ public interface PortFolioService {
 	
 	// 포트폴리오 수정하기
 	// ポートフォリオ修正
-	int modifyPort(FullPortFolioDTO port);
+	void modifyPort(FullPortFolioDTO port);
 	
 	// 포트폴리오 삭제하기
 	// ポートフォリオ削除

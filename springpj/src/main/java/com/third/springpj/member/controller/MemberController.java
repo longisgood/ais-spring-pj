@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.third.springpj.member.service.MemberService;
 import com.third.springpj.member.vo.MemberVO;
@@ -95,8 +96,6 @@ public class MemberController {
 	@GetMapping("/mypage")
 	public String MyPage(HttpSession session, MemberVO loginMember, Model model) {
 		loginMember = (MemberVO) session.getAttribute("userInfo");
-
-		System.out.println(loginMember.toString());
 		List<PortFolioBaseVO> result = ms.getPortFolioList(loginMember.getMId());
 		model.addAttribute("portfolio", result);
 
@@ -183,5 +182,23 @@ public class MemberController {
 		System.out.println(mNum);
 
 		return ms.withdrawMember(mNum);
+	}
+	
+	@GetMapping("/deleteP")
+	public String deleteP(Model model,PortFolioBaseVO base,RedirectAttributes rttr) {
+		
+		int result = ms.deletePortFolio(base.getPNum());
+		if(result == 1) {
+			String message = "削除できました。";
+			rttr.addFlashAttribute("msg",message);
+			
+			return "redirect:/member/mypage";
+		}
+		
+		String message = "エラーが出ました。問題がある場合サイトの番号で連絡してください。";
+		rttr.addFlashAttribute("msg",message);
+		
+		
+		return "redirect:/member/mypage";
 	}
 }
