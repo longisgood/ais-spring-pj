@@ -46,8 +46,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int deletePortFolio(int pNum) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = md.deleteBasePortFolio(pNum);
+		return result;
 	}
 
 	@Override
