@@ -13,7 +13,7 @@ public interface MainDAO {
 	// SQL021 - 로그인 한 멤버의 포트폴리오 Title 가져오기
 	//　該当するユーザーが作成したポートフォリオのタイトルを出力
 	@Select("select pTitle from tbl_portfolio_base where mId = #{mId}")
-	String loadMemberTitle(String mId);
+	List<PortFolioBaseVO> loadMemberTitle(String mId);
 
 	// SQL022 - 최신 포트폴리오 제목,아이디 6개 가져오기
 	//　最新のポートフォリオを6つまで出力

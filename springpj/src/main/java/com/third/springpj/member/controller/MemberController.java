@@ -29,10 +29,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService ms;
-  
+
 	@Autowired
 	JavaMailSender mailSender;
-
 
 	// 로그인로고버튼 클릭시 로그인 페이지 이동
 	@GetMapping("/login-btn")
@@ -85,28 +84,24 @@ public class MemberController {
 	// 아이디 찾기 부분에서 찾기버튼 클릭시 이메일 체크
 	@PostMapping("/eMailFind")
 	public @ResponseBody String eMailFind(String mEmail) {
-
-		int result = ms.emailCheck(mEmail);
-		if (result == 0) {
-			String message = "해당 정보는 일치하지 않습니다";
-			return message;
-		} else {
-			return ms.eMailFind(mEmail);
-		}
-
+		return ms.eMailFind(mEmail);
 	}
-
 	
-
+	@PostMapping("/pwFind")
+	public String pwFind(MemberVO user) {
+			return ms.getPw(user);
+		
+	}
 	@GetMapping("/mypage")
 	public String MyPage(HttpSession session, MemberVO loginMember, Model model) {
 		loginMember = (MemberVO) session.getAttribute("userInfo");
-		
+
 		System.out.println(loginMember.toString());
 		List<PortFolioBaseVO> result = ms.getPortFolioList(loginMember.getMId());
 		model.addAttribute("portfolio", result);
 
 		return "member/mypage";
+
 	}
 
 	// 가입 페이지로 이동
@@ -161,29 +156,27 @@ public class MemberController {
 		return "redirect:../";
 	}
 
-
-		//인증메일 전송
-		@GetMapping("/checkEmail")
-		@ResponseBody
-		public String sendMail(@RequestParam("member_email") String email)throws Exception {
-			System.out.println(email);
-			String code = "";
-			for(int i=0; i<5;i++) {
-				code +=(int)(Math.random()*10);
-			}
-			
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message,"UTF-8");
-			helper.setFrom("yukitozx7@gmail.com");
-			helper.setTo(email);
-			helper.setSubject("인증 메일입니다.");
-			helper.setText("인증 코드 : <h3>["+code+"]</h3>",true);
-			mailSender.send(message);
-			System.out.println("발신 완료");
-			return code;
+	// 인증메일 전송
+	@GetMapping("/checkEmail")
+	@ResponseBody
+	public String sendMail(@RequestParam("member_email") String email) throws Exception {
+		System.out.println(email);
+		String code = "";
+		for (int i = 0; i < 5; i++) {
+			code += (int) (Math.random() * 10);
 		}
 
-  
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+		helper.setFrom("yukitozx7@gmail.com");
+		helper.setTo(email);
+		helper.setSubject("인증 메일입니다.");
+		helper.setText("인증 코드 : <h3>[" + code + "]</h3>", true);
+		mailSender.send(message);
+		System.out.println("발신 완료");
+		return code;
+	}
+
 	@PostMapping("delete")
 	public @ResponseBody int Delete(int mNum) {
 
@@ -192,4 +185,3 @@ public class MemberController {
 		return ms.withdrawMember(mNum);
 	}
 }
-

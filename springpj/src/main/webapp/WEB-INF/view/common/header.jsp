@@ -44,6 +44,7 @@
 				<button class="login-btn" id="login-btn">Login</button>
 			</c:when>
 			<c:otherwise>
+				<button id="mypage">My Page</button>
 				<button class="login-btn" id="logout-btn">Logout</button>
 			</c:otherwise>
 		</c:choose>
@@ -61,5 +62,8 @@
 			   location.href = "${contextPath}/member/logout-btn"
 		    });
 
+			$("#mypage").click(function(){
+				location.href = "member/mypage";
+			}); 
 	</script>
 
