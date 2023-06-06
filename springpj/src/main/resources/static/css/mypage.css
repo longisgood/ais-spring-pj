@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.container {
+  background-color: lightgreen;
+  padding: 20px;
+}
+
+.container > div {
+  margin-bottom: 10px;
+}
+
+
+span#deleteBtn {
+  background-color: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+h1 {
+  color: darkblue;
+  margin-top: 20px;
+}
