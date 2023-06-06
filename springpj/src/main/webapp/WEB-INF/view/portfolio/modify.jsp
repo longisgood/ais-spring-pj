@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jsp"%>
+<link href="${contextPath}/css/write.css" rel="stylesheet"
+	type="text/css">
 <section class="container">
 	<h1>수정 페이지</h1>
 	<form id="change" action="change" method="post">
