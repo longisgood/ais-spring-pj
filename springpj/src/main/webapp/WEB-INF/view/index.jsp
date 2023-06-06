@@ -10,6 +10,28 @@
 <button id="detail" onclick = "javascript:location.href='portfolio/detail'">Detail</button>
 <button id="modify">Modify</button>
 <button id="write">Write</button>
+<button id="main">Main</button>
+
+
+
+	<c:forEach items = "${PortFolio}" var = "item">
+		<input type = "text" value = "${item.PTitle}">
+	</c:forEach>
+
+
+
+
+<c:choose>
+	<c:when test="${userInfo ne null}">
+		<c:forEach items = "${portFolio}" var = "item">
+			<input type = "text" value = "${item.PTitle}">
+		</c:forEach>
+	</c:when>
+	<c:otherwise>
+	<h1> 없어 새끼야</h1>
+	</c:otherwise>
+
+</c:choose>
 
 
 <script>
@@ -24,6 +46,9 @@
 	});
 	$("#write").click(function(){
 		location.href = "portfolio/write";
+	});
+	$("#main").click(function(){
+		location.href = "main";
 	});
 	
 </script>

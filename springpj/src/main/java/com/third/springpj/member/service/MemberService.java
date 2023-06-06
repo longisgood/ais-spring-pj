@@ -24,7 +24,7 @@ public interface MemberService {
  
 	// 비밀번호 불러오기
 	// パスワ－ド出力
-	String getPw(String mId);
+	String getPw(MemberVO user);
 	
 	// 로그인한 멤버 포트폴리오 게시물 불러오기
 	// ログインしたユーザーのポートポートフォリオ出力
