@@ -58,8 +58,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO memberInfo(int mNum) {
-		// TODO Auto-generated method stub
-		return null;
+		return md.findLoginMember(mNum);
 	}
 
 	@Override

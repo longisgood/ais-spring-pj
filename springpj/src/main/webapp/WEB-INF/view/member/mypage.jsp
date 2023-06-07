@@ -19,6 +19,7 @@
 		</c:forEach>
 	</div>
 	<h1>${userInfo.MName}様、おはようございます！</h1>
+	<button id="infopage">情報修正</button>
 </section>
 <script>
 	var msg = "${msg}"
@@ -38,6 +39,10 @@
 	
 	$('#deleteBtn').click(function() {
 		$('#deleteP').submit();
+	})
+	
+	$("#infopage").click(function(){
+		location.href = "info";
 	})
 </script>
 <%@ include file="../common/footer.jsp"%>

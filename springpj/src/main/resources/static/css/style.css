@@ -86,7 +86,11 @@ input[type="checkbox"] {
 #submitBtn,
 #deleteBtn,
 #backBtn,
-#modifyBtn {
+#modifyBtn,
+#infopage,
+#a,
+#b,
+#c {
   padding: 10px 20px;
   background-color: green;
   color: white;
@@ -97,7 +101,11 @@ input[type="checkbox"] {
 #submitBtn:hover,
 #deleteBtn:hover,
 #backBtn:hover,
-#modifyBtn:hover {
+#modifyBtn:hover,
+#infopage:hover,
+#a:hover,
+#b:hover,
+#c:hover {
   background-color: darkgreen;
   border-radius: 1px solid;
 }

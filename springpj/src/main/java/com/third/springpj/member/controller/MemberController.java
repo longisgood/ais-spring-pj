@@ -105,7 +105,7 @@ public class MemberController {
 
 	// 가입 페이지로 이동
 	// 加入ページに移動
-	@GetMapping("join")
+	@GetMapping("/join")
 	public String Join() {
 		return "member/join";
 	}
@@ -134,21 +134,13 @@ public class MemberController {
 	}
 
 	// 수정페이지로 이동
-	@GetMapping("info")
-	public String Info(Model model, MemberVO user) {
-		log.debug("수정 페이지로 이동");
-
-		user.setMId("aaaa");
-		user.setMPw("asdasda");
-		MemberVO result = ms.loginCheck(user);
-
-		model.addAttribute("member", result);
-
+	@GetMapping("/info")
+	public String Info() {
 		return "member/info";
 	}
 
 	// 회원정보 수정
-	@PostMapping("info")
+	@PostMapping("/chageInfo")
 	public String Info(MemberVO user) {
 		ms.modifyMember(user);
 
