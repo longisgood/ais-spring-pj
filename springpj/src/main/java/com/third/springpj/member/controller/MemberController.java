@@ -174,10 +174,10 @@ public class MemberController {
 		MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
 		helper.setFrom("yukitozx7@gmail.com");
 		helper.setTo(email);
-		helper.setSubject("인증 메일입니다.");
-		helper.setText("인증 코드 : <h3>[" + code + "]</h3>", true);
+		helper.setSubject("認証メールです。");
+		helper.setText("認証コード : <h3>[" + code + "]</h3>", true);
 		mailSender.send(message);
-		System.out.println("발신 완료");
+		System.out.println("発信完了");
 		return code;
 	}
 
