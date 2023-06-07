@@ -46,7 +46,7 @@ public class PortFolioController {
 		portfolio.setMId(loginMember.getMId());
 		ps.writePortFolio(portfolio);
 
-		String msg = "作成した文書が登録しました。";
+		String msg = "作成した文書が登録できました。";
 
 		rttr.addFlashAttribute("message",msg);
 

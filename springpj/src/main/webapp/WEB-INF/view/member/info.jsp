@@ -11,7 +11,7 @@
 				onchange="previewImage(event)" hidden>
 		</div>
 		<div class="input-row" id="idcheck">
-			<input type="text" class="id" id="mId" name="mId" value="${member.MId}"
+			<input type="text" class="id" id="mId" name="mId" value="${userInfo.MId}"
 				readonly> 
 		</div>
 		<div id="password">
@@ -24,25 +24,25 @@
 					placeholder="비밀번호 확인">
 			</div>
 		</div>
-		<p id=pwcheck class="visibility">임시 메세지</p>
+		<p id=pwcheck class="visibility">空欄</p>
 
 		<div class="input-row">
-			<input type="text" id="mName" name="mName" class="name" value="${member.MName}"
+			<input type="text" id="mName" name="mName" class="name" value="${userInfo.MName}"
 				placeholder="이름 입력">
 		</div>
 		<div class="input-row">
-			<input type="number" class="age" id="mAge" name="mAge" value="${member.MAge}"
+			<input type="number" class="age" id="mAge" name="mAge" value="${userInfo.MAge}"
 				placeholder="나이" min="0" maxlength="3"
 				oninput="numberMaxLength(this);">
 		</div>
 
-		<input type="hidden" name="mGender" id="mGender" value="${member.MGender}"> <span>male</span><input
+		<input type="hidden" name="mGender" id="mGender" value="${userInfo.MGender}"> <span>male</span><input
 			type="radio" class="radio" name="option" value="male"> <span>female</span><input
 			type="radio" class="radio" name="option" value="female"> <span>other</span><input
 			type="radio" class="radio" name="option" value="other">
 
 		<div class="input-row">
-			<input type="email" id="mEmail" class="email" name="mEmail" value="${member.MEmail}"
+			<input type="email" id="mEmail" class="email" name="mEmail" value="${userInfo.MEmail}"
 				placeholder="이메일 입력"> <input type="button" class="button"
 				required value="코드 송신" onclick="showCode();">
 		</div>
@@ -52,12 +52,12 @@
 				<input type="button" class="button" value="코드 확인">
 			</div>
 		</div>
-		<input type="submit" class="btn" value="UPDATE"> 
-		<input type="button" class="btn" value="DELETE" onclick = "deleteuser();">
-		<input type="button" class="btn" value="B A C K" onclick = "goBack()">
+		<input id="a"  type="submit" class="btn" value="UPDATE"> 
+		<input id="b"  type="button" class="btn" value="DELETE" onclick = "deleteuser();">
+		<input id="c"   type="button" class="btn" value="B A C K" onclick = "goBack()">
 		<input type="hidden" id="pw_cd" value="F"> 
 		<input type="hidden" id="code_cd" value="F"> 
-		<input type="hidden" id = "mNum" name = "mNum" value="${member.MNum}"> 
+		<input type="hidden" id = "mNum" name = "mNum" value="${userInfo.MNum}"> 
 		
 	</form>
 
