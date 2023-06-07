@@ -88,7 +88,9 @@ public class MemberController {
 		return ms.eMailFind(mEmail);
 	}
 	
+	
 	@PostMapping("/pwFind")
+	@ResponseBody
 	public String pwFind(MemberVO user) {
 			return ms.getPw(user);
 		
