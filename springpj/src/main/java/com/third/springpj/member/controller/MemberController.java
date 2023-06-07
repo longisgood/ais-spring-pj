@@ -34,14 +34,14 @@ public class MemberController {
 	@Autowired
 	JavaMailSender mailSender;
 
-	// 로그인로고버튼 클릭시 로그인 페이지 이동
+	//Loginボタンを押せばページで移動
 	@GetMapping("/login-btn")
 	public String loginbtn() {
 
 		return "member/login";
 	}
 
-	// 로그아웃버튼 클릭시 메인 페이지 이동
+	//Logautボタンを押せばページで移動
 	@GetMapping("/logout-btn")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -50,7 +50,7 @@ public class MemberController {
 
 	}
 
-	// 로그인확인버튼 클릭시 수행
+	//Login確認ボタンを押せば実行
 	@PostMapping("/loginCheck")
 	public String loginCheck(Model model, MemberVO user, HttpSession session) {
 
@@ -64,7 +64,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-//   아이디 찾기 화면으로이동
+//   ID探すページで移動　　
 	@GetMapping("/find1")
 	public String find1(Model model) {
 
@@ -74,7 +74,7 @@ public class MemberController {
 
 	}
 
-// 비번 찾기 화면으로이동
+// パスワード探すページで移動
 	@GetMapping("/find2")
 	public String find2(Model model) {
 
@@ -82,10 +82,11 @@ public class MemberController {
 		return "member/find";
 	}
 
-	// 아이디 찾기 부분에서 찾기버튼 클릭시 이메일 체크
+	// ID探すの情報を表示
 	@PostMapping("/eMailFind")
 	public @ResponseBody String eMailFind(String mEmail) {
-		return ms.eMailFind(mEmail);
+		String id = ms.eMailFind(mEmail);
+		return id;
 	}
 	
 	
@@ -132,8 +133,10 @@ public class MemberController {
 
 	// 입력한 이메일로 가입한 유저가 있는지 확인
 	@PostMapping("/emailCheck")
-	public @ResponseBody int emailCheck(String mEmail) {
-		return ms.emailCheck(mEmail);
+	@ResponseBody 
+	public int emailCheck(String mEmail) {
+		int result = ms.emailCheck(mEmail);
+		return result;
 	}
 
 	// 회원 가입
