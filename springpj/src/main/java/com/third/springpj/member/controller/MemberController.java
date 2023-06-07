@@ -96,15 +96,16 @@ public class MemberController {
 		
 	}
 	@GetMapping("/mypage")
-	public String MyPage(HttpSession session, MemberVO loginMember, Model model) {
-		loginMember = (MemberVO) session.getAttribute("userInfo");
-		List<PortFolioBaseVO> result = ms.getPortFolioList(loginMember.getMId());
-		model.addAttribute("portfolio", result);
 
+	public String mypage(HttpSession session, Model model) {
+		MemberVO loginMember = (MemberVO) session.getAttribute("userInfo");
+		String id = loginMember.getMId();
+		List<PortFolioBaseVO> result = ms.getPortFolioList(id);
+		model.addAttribute("portfolio", result);
 		return "member/mypage";
 
 	}
-
+	
 	// 가입 페이지로 이동
 	// 加入ページに移動
 	@GetMapping("/join")
