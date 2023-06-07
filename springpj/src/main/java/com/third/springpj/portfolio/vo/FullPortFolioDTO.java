@@ -36,6 +36,7 @@ public class FullPortFolioDTO extends PortFolioBaseVO {
 	
 	public PortFolioBaseVO seperBase(FullPortFolioDTO p) {
 		PortFolioBaseVO base = new PortFolioBaseVO();
+		base.setPNum(p.getPNum());
 		base.setPTitle(p.getPTitle());
 		base.setMId(p.getMId());
 		base.setPCareer(p.getPCareer());
@@ -50,6 +51,7 @@ public class FullPortFolioDTO extends PortFolioBaseVO {
 	
 	public PortFolioDetailVO seperDetail(FullPortFolioDTO p) {
 		PortFolioDetailVO detail = new PortFolioDetailVO();
+		detail.setPNum(pNum);
 		detail.setPSkill(pSkill);
 		detail.setPText(pText);
 		return detail;

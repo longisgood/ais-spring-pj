@@ -46,7 +46,7 @@ public class PortFolioController {
 		portfolio.setMId(loginMember.getMId());
 		ps.writePortFolio(portfolio);
 
-		String msg = "作成した文書が登録しました。";
+		String msg = "作成した文書が登録できました。";
 
 		rttr.addFlashAttribute("message",msg);
 
@@ -62,7 +62,9 @@ public class PortFolioController {
 	}
 
 	@PostMapping("/change")
-	public String Change(FullPortFolioDTO portfolio, Model model,RedirectAttributes rttr) {
+	public String Change(FullPortFolioDTO portfolio, Model model,RedirectAttributes rttr,HttpSession session) {
+		MemberVO loginMember = (MemberVO)session.getAttribute("userInfo");
+		portfolio.setMId(loginMember.getMId());
 		ps.modifyPort(portfolio);
 		String message = "修正できました。";
 		rttr.addFlashAttribute("msg",message);

@@ -8,17 +8,17 @@
 	<!-- 아이디 찾기 기능 구현 -->
 	<form>
 		<h1>IDを忘れた場合</h1>
-		<div class="row">
+
 			<div class="col-md-10 inputbb">
 				<div class="form-group">
-					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-						<input type="email" name="mEmail" class="mEmail" id="mEmail"
-							placeholder="email" required>
-						<button onclick="eMailFind()">確認</button>
+					<div class="eMail">
+						<input type="email" name="idfindmEmail" class="idfindmEmail"
+							id="idfindmEmail" placeholder="email" required>
+						<button onclick="emailCheck()">確認</button>
 					</div>
 				</div>
 			</div>
-		</div>
+
 	</form>
 
 </div>
@@ -35,14 +35,15 @@
 					<div>
 						<input type="text" name="mId" class="mId" id="mId"
 							placeholder="mId" required>
-						<button onclick="idCheck()">確認</button>
 					</div>
 					<div class="eMail">
 						<input type="email" name="pwfindmEmail" class="pwfindmEmail"
 							id="pwfindmEmail" placeholder="email" required>
-						<button onclick="emailCheck()">確認</button>
 					</div>
-						<button　onclick = "">確認</button>
+					<button 　onclick="pwFind">確認</button>
+					<input type="text" name="codein" class="codein" id="codein">
+					<button id="codeCheck">Code確認</button>
+					<input type="text" name="pw" class="pw" id="pw">
 				</div>
 			</div>
 		</div>
@@ -71,18 +72,17 @@
 			alert(msg);
 
 		} */
-		
-		
-		//ID探すのeMailを確認を通じてIDの情報を返還
-	function eMailFind() {
+
+	//ID探すのeMailを確認を通じてIDの情報を返還
+/* function emailCheck() {
 		$.ajax({
 			type : "POST",
 			url : "eMailFind",
 			data : {
-				"mEmail" : document.getElementById("mEmail").value
+				"mEmail" : document.getElementById("idfindmEmail").value
 			},
 			success : function(result) {
-				if (result == 1) {
+				if (result == "") {
 					alert("確認ができました。");
 				} else {
 					alert("없어 병신아");
@@ -94,8 +94,8 @@
 		});
 
 	}
-
-		//パスワード探す機能のIDが合ってるか確認する
+ */
+	//パスワード探す機能のIDが合ってるか確認する
 	function idCheck() {
 		$.ajax({
 			type : "POST",
@@ -118,7 +118,7 @@
 	}
 
 	//パスワード探す機能のeMailが合ってるか確認する
-	function emailCheck() {
+	/* function emailCheck() {
 		$.ajax({
 			type : "POST",
 			url : "emailCheck",
@@ -137,7 +137,62 @@
 			}
 		});
 
-	}
+	} */
+	
+	var emailCode = "";
+	$('#findBtn').click(function() {
+		$.ajax({
+			type : 'post',
+			url : 'getPw',
+			dataType : 'json',
+			data : {'mId' : $('#pwfindmId').val(),
+				'mEmail' : $('#pwfindmEmail').val()
+			},
+			success : function(result) {
+				console.log(result)
+				/if (data != null) {
+					$.ajax({
+						type : 'post',
+						url : 'checkEmail',
+						dataType : 'json',
+						data : {'mEmail' : $('#pwfindmEmail').val()},
+						
+						success : function(code){
+							$("#codein").show();
+							$("#codeCheck").show();
+							console.log(code)
+							emailCode = code;				
+						}	
+					})	
+				} else {
+					console.log('wa')
+				alert("Id/Emailが間違えました。")
+				} 
+			}
+
+		})
+	})
+	$('#codeCheck').click(function(){
+		$.ajax({
+			type : 'post',
+			url : 'getPw',
+				dataType : 'json',
+				data : {'mId' : $('#pwfindmId').val(),
+					'mEmail' : $('#pwfindmEmail').val()},
+		success : function(result){
+			if($('#codein').val() == emailCode){
+				$('#pw').show();
+				$('#pw').val(result);
+			}else{
+				alert("Codeが間違えました。確認ください。")
+				
+			}
+		}
+		})
+		
+		
+	})
+	
 </script>
 
 

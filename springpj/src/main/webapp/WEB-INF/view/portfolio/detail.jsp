@@ -9,53 +9,46 @@
 	</form>
 	<c:if test="${port.viewCheck eq 'Y'}">
 		<p>
-		제목 <input type="text" value="${port.PTitle}" readonly>
-	</p>
-	<p>
-		아이디 <input type="text" value="${port.MId}" readonly>
-	</p>
-	<p>
-		직업 <input type="text" value="${port.PJob}" readonly>
-	</p>
-	<p>
-		회사 <input type="text" value="${port.PComp}" readonly>
-	</p>
-	<p>
-		학력 <input type="text" value="${port.PEdu}" readonly>
-	</p>
-	<p>
-		경력 <input type="text" value="${port.PCareer}" readonly>
-	</p>
-	<p>
-		자격증 <input type="text" value="${port.PLisence}" readonly>
-	</p>
+			タイトル <input type="text" value="${port.PTitle}" readonly>
+		</p>
+		<p>
+			職業 <input type="text" value="${port.PJob}" readonly>
+		</p>
+		<p>
+			会社 <input type="text" value="${port.PComp}" readonly>
+		</p>
+		<p>
+			学歴 <input type="text" value="${port.PEdu}" readonly>
+		</p>
+		<p>
+			経歴 <input type="text" value="${port.PCareer}" readonly>
+		</p>
+		<p>
+			資格証 <input type="text" value="${port.PLisence}" readonly>
+		</p>
 	</c:if>
 	<div class="details">
 		<p>
-			기술<input type="text" value="${port.PSkill}" readonly>
+			技術<input type="text" value="${port.PSkill}" readonly>
 		</p>
 		<p>
-			상세내용<input type="text" value="${port.PText}" readonly>
+			詳細内容<input type="text" value="${port.PText}" readonly>
 		</p>
-		<p>
-			파일 <input type="text" value="${port.PFile}" readonly>
-		</p>
-		<button id="modifyBtn" type="submit">수정하기</button>
-		<form id= "delete" action="delete" method="get">
-				<input type="hidden" id="pNum" name="pNum" value="${port.PNum}">
-				<button id="deleteBtn" type="submit">Delete</button>
+		<button id="modifyBtn" type="submit">修正</button>
+		<button id="deleteBtn" type="submit">削除</button>
+		<form id="delete" action="delete" method="get">
+			<input type="hidden" id="pNum" name="pNum" value="${port.PNum}">
 		</form>
 	</div>
 </div>
 
 <script>
+	var msg = "${msg}"
 
-	var  msg = "${msg}"
-	
-	if(msg != ''){
+	if (msg != '') {
 		swal('処理完了', msg, 'success')
 	}
-	
+
 	$("#deleteBtn").click(function() {
 		$('#delete').submit();
 	})

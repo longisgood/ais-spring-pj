@@ -30,10 +30,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService ms;
-  
+
 	@Autowired
 	JavaMailSender mailSender;
-
 
 	// 로그인로고버튼 클릭시 로그인 페이지 이동
 	@GetMapping("/login-btn")
@@ -86,34 +85,30 @@ public class MemberController {
 	// 아이디 찾기 부분에서 찾기버튼 클릭시 이메일 체크
 	@PostMapping("/eMailFind")
 	public @ResponseBody String eMailFind(String mEmail) {
-
-		int result = ms.emailCheck(mEmail);
-		if (result == 0) {
-			String message = "해당 정보는 일치하지 않습니다";
-			return message;
-		} else {
-			return ms.eMailFind(mEmail);
-		}
-
+		return ms.eMailFind(mEmail);
 	}
-
 	
-
+	
+	@PostMapping("/pwFind")
+	@ResponseBody
+	public String pwFind(MemberVO user) {
+			return ms.getPw(user);
+		
+	}
 	@GetMapping("/mypage")
+
 	public String mypage(HttpSession session, Model model) {
 		MemberVO loginMember = (MemberVO) session.getAttribute("userInfo");
 		String id = loginMember.getMId();
 		List<PortFolioBaseVO> result = ms.getPortFolioList(id);
-		if(result.isEmpty()) {
-			return "member/mypage";
-		}
 		model.addAttribute("portfolio", result);
 		return "member/mypage";
+
 	}
 	
 	// 가입 페이지로 이동
 	// 加入ページに移動
-	@GetMapping("join")
+	@GetMapping("/join")
 	public String Join() {
 		return "member/join";
 	}
@@ -142,50 +137,40 @@ public class MemberController {
 	}
 
 	// 수정페이지로 이동
-	@GetMapping("info")
-	public String Info(Model model, MemberVO user) {
-		log.debug("수정 페이지로 이동");
-
-		user.setMId("aaaa");
-		user.setMPw("asdasda");
-		MemberVO result = ms.loginCheck(user);
-
-		model.addAttribute("member", result);
-
+	@GetMapping("/info")
+	public String Info() {
 		return "member/info";
 	}
 
 	// 회원정보 수정
-	@PostMapping("info")
+	@PostMapping("/chageInfo")
 	public String Info(MemberVO user) {
 		ms.modifyMember(user);
 
 		return "redirect:../";
 	}
 
-
-		//인증메일 전송
-		@GetMapping("/checkEmail")
-		@ResponseBody
-		public String sendMail(@RequestParam("member_email") String email)throws Exception {
-			System.out.println(email);
-			String code = "";
-			for(int i=0; i<5;i++) {
-				code +=(int)(Math.random()*10);
-			}
-			
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message,"UTF-8");
-			helper.setFrom("yukitozx7@gmail.com");
-			helper.setTo(email);
-			helper.setSubject("인증 메일입니다.");
-			helper.setText("인증 코드 : <h3>["+code+"]</h3>",true);
-			mailSender.send(message);
-			System.out.println("발신 완료");
-			return code;
+	// 인증메일 전송
+	@GetMapping("/checkEmail")
+	@ResponseBody
+	public String sendMail(@RequestParam("member_email") String email) throws Exception {
+		System.out.println(email);
+		String code = "";
+		for (int i = 0; i < 5; i++) {
+			code += (int) (Math.random() * 10);
 		}
 
-  
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+		helper.setFrom("yukitozx7@gmail.com");
+		helper.setTo(email);
+		helper.setSubject("인증 메일입니다.");
+		helper.setText("인증 코드 : <h3>[" + code + "]</h3>", true);
+		mailSender.send(message);
+		System.out.println("발신 완료");
+		return code;
+	}
+
 	@PostMapping("delete")
 	public @ResponseBody int Delete(int mNum) {
 
@@ -212,4 +197,3 @@ public class MemberController {
 		return "redirect:/member/mypage";
 	}
 }
-

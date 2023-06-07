@@ -34,9 +34,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String getPw(String mId) {
+	public String getPw(MemberVO user) {
 		// TODO Auto-generated method stub
-		return null;
+		return md.findPw(user);
 	}
 
 	@Override
@@ -58,8 +58,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO memberInfo(int mNum) {
-		// TODO Auto-generated method stub
-		return null;
+		return md.findLoginMember(mNum);
 	}
 
 	@Override
