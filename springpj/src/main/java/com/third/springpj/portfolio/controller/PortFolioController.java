@@ -31,11 +31,7 @@ public class PortFolioController {
 
 	// 작성페이지 이동
 	@GetMapping("/write")
-	public String WritePage(HttpSession session) {
-		MemberVO user = new MemberVO();
-		user.setMId("asia");
-
-		session.setAttribute("userInfo", user);
+	public String WritePage() {
 		return "portfolio/write";
 	}
 
