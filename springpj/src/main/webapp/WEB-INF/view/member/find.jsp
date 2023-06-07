@@ -41,6 +41,9 @@
 							id="pwfindmEmail" placeholder="email" required>
 					</div>
 					<button 　onclick="pwFind">確認</button>
+					<input type="text" name="codein" class="codein" id="codein">
+					<button id="codeCheck">Code確認</button>
+					<input type="text" name="pw" class="pw" id="pw">
 				</div>
 			</div>
 		</div>
@@ -136,6 +139,59 @@
 
 	} */
 	
+	var emailCode = "";
+	$('#findBtn').click(function() {
+		$.ajax({
+			type : 'post',
+			url : 'getPw',
+			dataType : 'json',
+			data : {'mId' : $('#pwfindmId').val(),
+				'mEmail' : $('#pwfindmEmail').val()
+			},
+			success : function(result) {
+				console.log(result)
+				/if (data != null) {
+					$.ajax({
+						type : 'post',
+						url : 'checkEmail',
+						dataType : 'json',
+						data : {'mEmail' : $('#pwfindmEmail').val()},
+						
+						success : function(code){
+							$("#codein").show();
+							$("#codeCheck").show();
+							console.log(code)
+							emailCode = code;				
+						}	
+					})	
+				} else {
+					console.log('wa')
+				alert("Id/Emailが間違えました。")
+				} 
+			}
+
+		})
+	})
+	$('#codeCheck').click(function(){
+		$.ajax({
+			type : 'post',
+			url : 'getPw',
+				dataType : 'json',
+				data : {'mId' : $('#pwfindmId').val(),
+					'mEmail' : $('#pwfindmEmail').val()},
+		success : function(result){
+			if($('#codein').val() == emailCode){
+				$('#pw').show();
+				$('#pw').val(result);
+			}else{
+				alert("Codeが間違えました。確認ください。")
+				
+			}
+		}
+		})
+		
+		
+	})
 	
 </script>
 
