@@ -3,13 +3,19 @@
 <%@ include file="common/header.jsp"%>
 <section class="container">
 
+<h1>Main</h1>
+<hr>
+<div>
+<h2>Lastest</h2>
 	<c:forEach items = "${PortFolio}" var = "item">
 		<input id="main" type = "button"  value = "${item.PTitle}">
 	</c:forEach>
+</div>
 
+<hr>
 
-
-
+<div>
+<h2>myPortfolio</h2>
 <c:choose>
 	<c:when test="${userInfo ne null}">
 		<c:forEach items = "${portFolio}" var = "item">
@@ -21,6 +27,7 @@
 	</c:otherwise>
 
 </c:choose>
+</div>
 </section>
 
 <script>

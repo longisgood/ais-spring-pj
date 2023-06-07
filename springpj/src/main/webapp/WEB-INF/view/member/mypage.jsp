@@ -11,15 +11,16 @@
 				method="get">
 				<input type="hidden" id="pNum" name="pNum" value="${item.PNum}">
 				<button id="detailBtn">${item.PTitle}</button>
+				<span id="deleteBtn">X</span>
 			</form>
 			<form id="deleteP" action="deleteP" method="get">
 			<input type="hidden" id="pNum" name="pNum" value="${item.PNum}">
-				<span id="deleteBtn">X</span>
 			</form>
 		</c:forEach>
 	</div>
 	<h1>${userInfo.MName}様、おはようございます！</h1>
 	<button id="infopage">情報修正</button>
+	<button id="writepage">作成</button>
 </section>
 <script>
 	var msg = "${msg}"
@@ -43,6 +44,10 @@
 	
 	$("#infopage").click(function(){
 		location.href = "info";
+	})
+	
+	$("#writepage").click(function(){
+		location.href = "../portfolio/write";
 	})
 </script>
 <%@ include file="../common/footer.jsp"%>
