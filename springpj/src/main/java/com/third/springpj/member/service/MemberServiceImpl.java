@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String getPw(MemberVO user) {
+	public int getPw(MemberVO user) {
 		// TODO Auto-generated method stub
 		return md.findPw(user);
 	}
@@ -74,6 +74,11 @@ public class MemberServiceImpl implements MemberService {
 	public String eMailFind(String mEmail) {
 		// TODO Auto-generated method stub
 		return md.eMailFind(mEmail);
+	}
+
+	@Override
+	public String realPw(MemberVO user) {
+		return md.findRealpw(user);
 	}
 
 }

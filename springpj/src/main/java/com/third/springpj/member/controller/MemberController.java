@@ -89,12 +89,22 @@ public class MemberController {
 	}
 	
 	
-	@PostMapping("/pwFind")
+	
+	  @PostMapping("/pwFind")
+	  @ResponseBody 
+	  public String pwFind(MemberVO user) { 
+		  String pw = ms.realPw(user);
+		  return pw;
+	  }
+	
+	
+	@PostMapping("/memberCheck")
 	@ResponseBody
-	public String pwFind(MemberVO user) {
-			return ms.getPw(user);
-		
+	public int memberCheck(MemberVO findMember) throws Exception {
+		int result = ms.getPw(findMember);
+		return result;
 	}
+	
 	@GetMapping("/mypage")
 	public String MyPage(HttpSession session, MemberVO loginMember, Model model) {
 		loginMember = (MemberVO) session.getAttribute("userInfo");
@@ -152,7 +162,7 @@ public class MemberController {
 	// 인증메일 전송
 	@GetMapping("/checkEmail")
 	@ResponseBody
-	public String sendMail(@RequestParam("member_email") String email) throws Exception {
+	public String sendMail(@RequestParam("mEmail") String email) throws Exception {
 		System.out.println(email);
 		String code = "";
 		for (int i = 0; i < 5; i++) {

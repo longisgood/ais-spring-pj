@@ -32,8 +32,11 @@ public interface MemberDAO {
 	
 	//SQL004 - 아이디랑 이메일로 비밀번호 찾기
 	//IDとEmailでパスワ－ド検索
+	@Select("select count(*) from tbl_pmember where mId = #{mId} and mEmail = #{mEmail}")
+	int findPw(MemberVO user);
+	
 	@Select("select mPw from tbl_pmember where mId = #{mId} and mEmail = #{mEmail}")
-	String findPw(MemberVO user);
+	String findRealpw(MemberVO user);
 	
 	//SQL005 - 멤버 아이디로 해당 아이디가 들어간 모든  기본 포트폴리오 찾기
 	//IDでユーザーの基本ポートフォリオ検索
