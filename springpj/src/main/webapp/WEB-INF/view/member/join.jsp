@@ -4,251 +4,204 @@
 <link href="${contextPath}/css/joinForm.css" rel="stylesheet"
 	type="text/css">
 <section>
-	<form action="join" method="POST" onsubmit="return checkValues()">
-		<div hidden>
-			<img id="preview" class="profile-pic" src="" onclick="fileInput()">
-			<input type="file" name="imageFile" id="profile-pic" accept="image/*"
-				onchange="previewImage(event)" hidden>
+	<form id="joinform" action="register" method="POST">
+		<div class="input-row" >
+			<input type="text" class="id" id="mId" name="mId"
+				placeholder="ID重複確認をしてください。"> <input type="button"
+				class="button" value="ID重複確認" id="reduplication_check"> <input
+				type="hidden" value="N" id="reduCkConfirm">
+		</div>
+		<div id="password">
+			<div class="input-row">
+				<input type="password" class="pw" id="mPw" name="mPw"
+					placeholder="パスワード入力">
+			</div>
+			<div class="input-row">
+				<font id="confirm" size="2"></font> <input type="password"
+					class="pw" id="mPwCheck" placeholder="パスワード確認">
+			</div>
 		</div>
 
-			<div class="input-row" id="idcheck">
-				<input type="text" class="id" id="mId" name="mId"
-					placeholder="중복확인을 해주세요"> <input type="button"
-					class="button" value="ID 중복확인" onclick="idCheck();">
-			</div>
-			<p class="visibility" id="mesage">임시 메세지</p>
-			<div id="password">
-				<div class="input-row">
-					<input type="password" class="pw" id="mPw" name="mPw"
-						placeholder="비밀번호 입력">
-				</div>
-				<div class="input-row">
-					<input type="password" class="pw" id="mPwCheck"
-						placeholder="비밀번호 확인">
-				</div>
-			</div>
-			<p id=pwcheck class="visibility">임시 메세지</p>
+		<div class="input-row">
+			<input type="text" id="mName" name="mName" class="name"
+				placeholder="名前入力">
+		</div>
+		<div class="input-row">
+			<input type="number"  id="mAge" name="mAge"
+				placeholder="年齢">
+		</div>
+		<input type="hidden" name="mGender" id="mGender"> 
+		<span>male</span><input type="radio" class="radio" name="option"
+			value="male" id="male"> <span>female</span><input
+			type="radio" class="radio" name="option" value="female" id="female">
 
-			<div class="input-row">
-				<input type="text" id="mName" name="mName" class="name"
-					placeholder="이름 입력">
-			</div>
-			<div class="input-row">
-				<input type="number" class="age" id="mAge" name="mAge"
-					placeholder="나이" min="0" maxlength="3"
-					oninput="numberMaxLength(this);">
-			</div>
-
-			<input type="hidden" name="mGender" id="mGender"> <span>male</span><input
-				type="radio" class="radio" name="option" value="male"> <span>female</span><input
-				type="radio" class="radio" name="option" value="female"> <span>other</span><input
-				type="radio" class="radio" name="option" value="other">
-
-			<div class="input-row">
-				<input type="email" id="mEmail" class="email" name="mEmail"
-					placeholder="이메일 입력"> <input type="button" class="button" required
-					value="코드 송신" onclick="showCode();">
-			</div>
-			<div class="input-row">
-				<div id="codecheck" class="visibility">
-					<input type="email" id="code" class=" email" placeholder="코드 입력">
-					<input type="button" class="button" value="코드 확인">
-				</div>
-			</div>
-			<div class ="button-container">
-		<input type="submit" class="btn" value="J O I N"> <input type="button" class="btn" value="B A C K" onclick="goBack();">
-			</div>
-		<input type="hidden" id="id_cd" value="F"> 
-		<input type="hidden" id="pw_cd" value="F"> <input type="hidden" id="code_cd" value="F">
+		<div class="input-row">
+			<input type="email" id="mEmail" class="email" name="mEmail"
+				placeholder="Emailを入力" ><button type="button"  id="emailCheck">コード送信</button>
+		</div>
+		<div class="input-row">
+			<input type="text" id="code" ><button type="button"  id="codeCheck">コード確認</button> <input
+				type="hidden" id="codeConfirm" value="N">
+		</div>
 	</form>
+	<div>
+				<button id="joinBtn">加入</button>
+				<button id="backBtn">後ろへ</button>
+		</div>
 </section>
 <script>
-	let mId = document.getElementById('mId');
-	let mPw = document.getElementById('mPw');
-	let mPwCheck = document.getElementById('mPwCheck');
-	let pwcheck = document.getElementById('pwcheck');
-	let mName = document.getElementById('mName');
-	let age = document.getElementById('mAge');
-	let gender = document.getElementById('mGender');
-	let id_cd = document.getElementById('id_cd');//중복확인 여부
-	let pw_cd = document.getElementById('pw_cd');// 비밀번호 일치 여부
-	let code_cd = document.getElementById('code_cd'); //이메일 송신코드 일치 여부
+	$('#code').hide();
+	$('#codeCheck').hide();
+	var emailcode = "";
 
-	//라디오 버튼 하나만 고르기
-	const radioButtons = document.querySelectorAll('input[class="radio"]');
-	radioButtons.forEach(function(radio) {
-		radio.addEventListener('click', function() {
-			var selectedOption = document
-					.querySelector('input[name="option"]:checked');
-			if (selectedOption) {
-				var selectedValue = selectedOption.value;
-				gender.value = selectedValue;
-			}
-			radioButtons.forEach(function(otherRadio) {
-				if (otherRadio !== radio) {
-					otherRadio.checked = false;
+	$("#reduplication_check").click(function() {
+		$.ajax({
+			url : "idCheck",
+			type : "POST",
+			dataType : "json",
+			data : {
+				"mId" : $("#mId").val()
+			},
+			success : function(data) {
+				if (data == 1) {
+					swal("不可能", "同じIDが存在います。", "info");
+					$("#mId").val("");
+				} else {
+					swal("可能", "使用してもいいIDです。", "info");
+					$("#reduCkConfirm").attr("value", "Y");
 				}
-			});
+			}
 		});
 	});
 
-	/* 	//사진 저장 관련 기능
-	 function fileInput() {
-	 var fileInput = document.getElementById("profile-pic");
-	 fileInput.click();
-	 }
-
-	 //사진 출력 기능
-	 function previewImage(event) {
-	 var input = event.target;
-	 var image = document.getElementById("preview");
-
-	 if (input.files && input.files[0]) {
-	 var reader = new FileReader();
-	 reader.onload = function() {
-	 image.src = reader.result;
-	 };
-	 reader.readAsDataURL(input.files[0]);
-	 } else {
-	 image.src = "";
-	 }
-	 } */
-
-	//숫자 자릿수 제한
-	function numberMaxLength(e) {
-		if (e.value.length > e.maxLength) {
-			e.value = e.value.slice(0, e.maxLength);
-		}
-	}
-
-	let password = document.getElementById('password');
-
-	//패스워드를 입력할 때마다 일치하는지검사 
-	password.addEventListener("input", checkPassword);
-
-	function checkPassword() {
-		document.getElementById("pwcheck").style.visibility = "visible";
-		if (mPw.value.trim().length == 0) {
-			document.getElementById('pwcheck').textContent = "비밀번호는 필수 항목입니다."
-		} else if (mPw.value.trim().length < 7 || mPw.value.trim().length > 10) {
-			document.getElementById('pwcheck').textContent = "비밀번호는 7~10자 사이로 입력해주세요."
-		} else if (mPw.value.trim() != mPwCheck.value.trim()) {
-			document.getElementById('pwcheck').textContent = "비밀번호가 서로 다릅니다"
-		} else {
-			document.getElementById('pwcheck').textContent = ""
-		}
-
-		if (pwcheck.textContent == "") {
-			$("#pw_cd").val("T");
-		} else {
-			$("#pw_cd").val("F");
-		}
-	}
-
-	//입력된 값 검사
-	function checkValues() {
-		if (mId.value.trim().length == 0) {
-			alert('아이디는 필수 항목입니다.');
-			mId.focus();
-			return false;
-		} else if (mId.value.trim().length < 3 || mId.value.trim().length > 10) {
-			alert('아이디는 3~10자로 입력해주세요');
-			mId.focus();
-			return false;
-		}
-		//이름체크
-		if (mName.value.trim().length == 0) {
-			alert('이름은 필수항목입니다.');
-			mName.focus();
-			return false;
-		} else if (mName.value.trim().length < 2
-				|| mName.value.trim().length > 10) {
-			alert('이름은 2~10자리로 입력해주세요.');
-			mName.focus();
-			return false;
-		}
-
-		if (mEmail.value.trim().length == 0) {
-			alert('이메일은 필수 항목입니다.');
-			mEmail.focus();
-			return false;
-		}
-
-		/* 이름에 숫자 못넣게 하기 */
-		let nameValue = mName.value;
-		for (let i = 0; i < nameValue.length; i++) {
-			if (!isNaN(nameValue.charAt(i))) {
-				let message = nameValue.charAt(i) + '은 사용할수 없습니다.';
-				alert(message);
-				mName.focus();
-				return false;
-			}
-		}
-
-		//중복확인과 비밀번호 일치가 확인 됬는지 확인
-		if (id_cd.value == 'F') {
-			alert('중복확인을 해주세요.');
-			return false;
-		}
-
-		if (pw_cd.value == 'F') {
-			alert('비밀번호를 올바르게 입력해주세요.');
-			return false;
-		}
-		/* if (code_cd.value == 'F') {
-			alert('코드를 올바르게 입력해주세요');
-			return false;
-		} */
-
-	}
-
-	//중복확인 
-	function idCheck() {
-		$.ajax({
-			type : "POST",
-			url : "idCheck",
-			data : {
-				"mId" : mId.value
-			},
-			success : function(data) {
-				document.getElementById("mesage").style.visibility = "visible";
-				if (data == 0) {
-					$("#mesage").text("사용 가능한 아이디입니다");
-					$("#id_cd").val("T");
-					//id_check_cd="true";
-				} else {
-					$("#mesage").text("이미 존재하는 아이디입니다");
-					$("#id_cd").val("F");
-
-				}
-
-			},
+	$(function() {
+		$('#mPw').keyup(function() {
+			$('#confirm').html('');
 		});
 
-	}
+		$('#mPwCheck').keyup(function() {
+			if ($('#mPw').val() != $('#mPwCheck').val()) {
+				$('#confirm').html('パスワードが一致しません。.');
+				$('#confirm').attr('color', 'red');
+			} else {
+				$('#confirm').html('パスワードが一致します。');
+				$('#confirm').attr('color', 'blue');
+			}
+		});
 
-	//코드 입력칸 나타내기
-	function showCode() {
-		$.ajax({
-					type : "POST",
-					url : "emailCheck",
-					data : {
-						"mEmail" : mEmail.value
-					},
-					success : function(data) {
-						if (data == 0) {
-							document.getElementById("codecheck").style.visibility = "visible";
-						} else {
-							alert("이 메일로 가입한 유저가 이미 존재합니다.");
-							document.getElementById("codecheck").style.visibility = "hidden";
-						}
+	});
 
-					},
-				});
-	}
+	$("#backBtn").click(function() {
+		history.go(-1);
+	});
 	
-	function goBack() {
-        window.history.back();
-    }
+	$("#emailCheck").click(function(){
+		$.ajax({
+			type : "post",
+			url : "emailCheck",
+			dataType : "json",
+			async:false,
+			data : {
+				"mEmail" : $("#mEmail").val()
+			},
+			success : function(result){
+				if(result == 0){
+					$.ajax({
+						type:'get',
+						url:'checkEmail',
+						dataType: "text",
+						async:false,
+						data : { "mEmail" : $("#mEmail").val()},
+						success : function(code){
+							if(code){
+								emailcode = code;
+								$("#code").show();
+								$("#codeCheck").show();
+								swal('完了','認証番号を送りました。','success')
+							}else{
+								swal('Error',"エーラが発生しました。",'error')
+							}
+						}
+					})
+				}else{
+					swal('禁止','一致するEmailが存在します。','warning')
+					
+				}
+			}
+		})
+	});
+	
+	$('#codeCheck').click(function(){
+		if($('#code').val() == emailcode){
+			$('#codeConfirm').val('Y');
+			swal("完了","確認できました。","success")
+		}else{
+			swal('確認要望','コードが違います。',"warning")
+		}
+	})
+		
+		$('#joinBtn').click(function() {
+			var valId = $('#mId').val();
+			var valPass = $('#mPw').val();
+			var valCPass = $('#mPwCheck').val();
+			var valName = $('#mName').val();
+			var valAge = $('#mAge').val();
+			var valEmail = $('#mEmail').val();
+			var idCheck = $('#reduCkConfirm').val();
+			var emailCheck = $('#codeConfirm').val();
+			
+			if($('#male').is(':checked')){
+				$('#mGender').attr('value','male')
+			}
+			
+			if($('#female').is(':checked')){
+				$('#mGender').attr('value','female')
+			}
+
+			if (valId == null || valId == undefined || valId == "") {
+				swal("不可能", "IDを入力してください。", "info");
+				$('#mId').focus();
+				return;
+			}
+			if (idCheck == "" || idCheck == "N") {
+				swal("不可能", "ID重複確認をしてください。", "info");
+				$('#reduCkConfirm').focus();
+				return;
+			}
+			if (valPass == null || valPass == undefined || valPass == "") {
+				swal("不可能", "パスワードを入力してください。", "info");
+				$('#member_pw').focus();
+				return;
+			}
+			if (valPass != valCPass) {
+				swal("不可能", "パスワードが一致されません。", "waring");
+				$('#mPw').val("");
+				$('#mPwCheck').val("");
+				$('#mPw').focus();
+				return;
+			}
+			if (valName == null || valName == undefined || valName == "") {
+				swal("不可能", "名前を入力してください。", "info");
+				$('#ｍName').focus();
+				return;
+			}
+
+			if (valAge == null || valAge == undefined || valAge == "") {
+				swal("不可能", "年齢を入力してください。", "info");
+				$("mAge").focus();
+				return;
+			}
+
+			if (!$('#male').is(':checked') && !$('#female').is(':checked')) {
+				swal("不可能", "性別を確認してください。", "info");
+				return;
+			}
+			if (emailCheck == "" || emailCheck == "N") {
+				swal("不可能", "Emailをチェックしてください。", "info");
+				return;
+			}
+			$('#joinform').submit();
+		});
+
 </script>
 <%@ include file="../common/footer.jsp"%>
