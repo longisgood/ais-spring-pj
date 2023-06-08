@@ -7,8 +7,11 @@
 <hr>
 <div>
 <h2>Lastest</h2>
-	<c:forEach items = "${PortFolio}" var = "item">
-		<input id="main" type = "button"  value = "${item.PTitle}">
+	<c:forEach items = "${PortFolio}" var ="item">
+	<form id="move" action="portfolio/detail" method="get">
+			<button id="lastest" >${item.PTitle}</button>
+		<input type="hidden" id="pNum" name="pNum" value="${item.PNum}">
+	</form>
 	</c:forEach>
 </div>
 
@@ -19,7 +22,10 @@
 <c:choose>
 	<c:when test="${userInfo ne null}">
 		<c:forEach items = "${portFolio}" var = "item">
-			<input id="maintitle"  type ="button" value = "${item.PTitle}">
+		<form id="mymove" action="portfolio/detail" method="get">
+			<button id="mywrite" >${item.PTitle}</button>
+			<input type="hidden" id="pNum" name="pNum" value="${item.PNum}">
+			</form>
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
@@ -37,15 +43,13 @@
 	$("#login").click(function(){
 		location.href = "member/login";
 	});
-	$("#find").click(function(){
-		location.href = "member/find";
-	});
-	$("#write").click(function(){
-		location.href = "portfolio/write";
-	});
-	$("#main").click(function(){
-		location.href = "main";
-	});
+	$("#lastest").click(function(){
+		$('#move').submit;
+	}); 
+	$("#mywrite").click(function(){
+		$('#mymove').submit;
+	}); 
+
 	
 </script>
 

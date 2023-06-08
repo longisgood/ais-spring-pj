@@ -126,7 +126,8 @@ public class MemberController {
 
 	// 아이디 중복확인 기능
 	@PostMapping("/idCheck")
-	public @ResponseBody int idCheck(String mId) {
+	@ResponseBody 
+	public int idCheck(String mId) {
 
 		return ms.idCheck(mId);
 	}
@@ -140,13 +141,10 @@ public class MemberController {
 	}
 
 	// 회원 가입
-	@PostMapping("/join")
+	@PostMapping("/register")
 	public String join(MemberVO user) {
-
-		log.info("회원가입 실행");
-
-		ms.joinMember(user);
-		return "redirect:./login";
+		 ms.joinMember(user); 
+		return "member/login";
 	}
 
 	// 수정페이지로 이동

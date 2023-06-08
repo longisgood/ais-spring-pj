@@ -19,15 +19,10 @@ public class MainController {
 	private MainDAO md;
 
 	@GetMapping("/")
-	public String MainCall(HttpSession session, Model model) {
+	public String MainCall(HttpSession session, Model model) throws Exception{
 		
 		List<PortFolioBaseVO> list = md.loadLastTitle();
 		model.addAttribute("PortFolio",list);
-		
-		
-		
-		
-		
 		
 		if (session.getAttribute("userInfo") != null) {
 
