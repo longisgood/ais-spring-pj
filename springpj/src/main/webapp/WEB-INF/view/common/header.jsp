@@ -64,7 +64,7 @@
 		    });
 
 			$("#mypage").click(function(){
-				location.href = "member/mypage";
+				location.href = "${contextPath}/member/mypage";
 			}); 
 	</script>
 
