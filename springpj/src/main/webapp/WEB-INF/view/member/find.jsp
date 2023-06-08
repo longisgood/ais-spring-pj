@@ -1,10 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jsp"%>
-<h1>Id/パスワード探す</h1>
+<style>
+    .heading {
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    /* 버튼 스타일 */
+    .eMail button {
+        background-color: #8FBC8F; /* 버튼 배경 색상 */
+        color: #FFFFFF; /* 버튼 텍스트 색상 */
+        border: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .pwfind button:hover {
+        background-color: #6B8E23; /* 마우스 호버 시 버튼 배경 색상 */
+    }
+    
+   /* 버튼 스타일 */
+    .pwfind button {
+        background-color: #8FBC8F; /* 버튼 배경 색상 */
+        color: #FFFFFF; /* 버튼 텍스트 색상 */
+        border: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .eMail button:hover {
+        background-color: #6B8E23; /* 마우스 호버 시 버튼 배경 색상 */
+    }
+    
+    body {
+        background-color: #E9F3E9; /* 연녹색 배경 색상 */
+    }
+
+    h1 {
+        color: #006400; /* 제목 색상 */
+    }
+
+    form {
+        background-color: #FFFFFF; /* 폼 배경 색상 */
+        padding: 20px;
+        width: 400px;
+        margin: 0 auto;
+        margin-top: 50px;
+        border-radius: 5px;
+    }
+
+    .form-group label {
+        color: #006400; /* 라벨 색상 */
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #006400; /* 입력 필드 테두리 색상 */
+        border-radius: 3px;
+        outline: none;
+    }
+
+    .form-group button {
+        background-color: #006400; /* 버튼 배경 색상 */
+        color: #FFFFFF; /* 버튼 텍스트 색상 */
+        border: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+</style>
+
+
+<h1 class="heading">Id/パスワード探す</h1>
 
 <div id="idFinddetail">
-	<h2>ID探す</h2>
+
 	<!-- 아이디 찾기 기능 구현 -->
 	<form>
 		<h1>IDを忘れた場合</h1>
@@ -27,7 +106,7 @@
 </div>
 
 <div id="pwFinddetail">
-	<h2>パスワード探す</h2>
+
 	<!-- 비밀번호 찾기 기능 구현 -->
 
 	<form>
