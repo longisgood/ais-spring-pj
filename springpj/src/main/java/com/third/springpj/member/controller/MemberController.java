@@ -155,11 +155,27 @@ public class MemberController {
 	}
 
 	// 회원정보 수정
-	@PostMapping("/chageInfo")
-	public String Info(MemberVO user) {
-		ms.modifyMember(user);
+	@PostMapping("/changeInfo")
+	public String Info(MemberVO user, HttpSession session,RedirectAttributes rttr) {
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		user.setMNum(userInfo.getMNum());
+		int result = ms.modifyMember(user);
+		if(result != 0) {
+			MemberVO changeMember = ms.memberInfo(user.getMNum());
+			
+			session.removeAttribute("userInfo");
+			session.setAttribute("userInfo",changeMember);
+			
+			String message = "成功的に修正されました。";
+			rttr.addFlashAttribute("flashMessage",message);
+			
+			return "redirect:/member/mypage";
+		}
+		
+		String message = "情報修正に失敗しました。もう一度お試しください。";
+		rttr.addFlashAttribute("flashMessage",message);
 
-		return "redirect:../";
+		return "redirect:/member/info";
 	}
 
 	// 인증메일 전송
@@ -183,12 +199,23 @@ public class MemberController {
 		return code;
 	}
 
-	@PostMapping("delete")
-	public @ResponseBody int Delete(int mNum) {
-
-		System.out.println(mNum);
-
-		return ms.withdrawMember(mNum);
+	@GetMapping("/delete")
+	public String withdraw(HttpSession session,RedirectAttributes rttr) {
+		MemberVO loginMember = (MemberVO) session.getAttribute("userInfo");
+		int result = ms.withdrawMember(loginMember);
+		if(result != 0) {
+			
+			session.removeAttribute("userInfo");
+			String msg = "利用してくれてありがとうございます。";
+			rttr.addFlashAttribute("msg",msg);
+			
+			return "redirect:/";
+		}
+		
+		String msg = "脱退に失敗しました。もう一度お試しください。";
+		rttr.addFlashAttribute("msg",msg);
+		
+		return "redirect:/member/info";
 	}
 	
 	@GetMapping("/deleteP")

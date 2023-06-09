@@ -50,6 +50,10 @@
 		$('#mymove').submit;
 	}); 
 
+	var msg = "${msg}";
+	if(msg != ""){
+		swal('感謝',msg,'success')
+	}
 	
 </script>
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.third.springpj.member.dao.MemberDAO;
 import com.third.springpj.member.vo.MemberVO;
@@ -67,8 +68,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int withdrawMember(int mNum) {
-		return md.changeWithdraw(mNum);
+	@Transactional
+	public int withdrawMember(MemberVO user) {
+		int result = md.changeWithdraw(user);
+		if(result != 0) {
+			md.deletePortFolios(user.getMId());
+			
+			return result;
+		}
+		
+		return 0;
 	}
 	@Override
 	public String eMailFind(String mEmail) {
