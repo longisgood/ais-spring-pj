@@ -49,7 +49,7 @@ public interface MemberService {
 	
 	// 회원 탈퇴
 	// 会員退会
-	int withdrawMember(int mNum);
+	int withdrawMember(MemberVO user);
 	
 	//eMail로 아이디찾기
 	String eMailFind(String eMail);

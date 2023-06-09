@@ -73,7 +73,7 @@ public interface MemberDAO {
 	//SQL011 - 회원탈퇴 여부 변경
 	//ユーザー退会
 	@Update("update tbl_pmember set withdraw = 'N' where mNum = #{mNum}")
-	int changeWithdraw(int mNum);
+	int changeWithdraw(MemberVO user);
 	
 	//SQL012 - 탈퇴회원 아이디에 해당하는 포트폴리오 전체를 삭제
 	//該当するIDが持つ基本ポートフォリオ削除
