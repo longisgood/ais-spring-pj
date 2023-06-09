@@ -56,7 +56,7 @@ public class MemberController {
 
 		MemberVO result = ms.loginCheck(user);
 		if (result == null) {
-			String message = "해당 정보는 일치하지 않습니다";
+			String message = "該当する情報が一致されません。";
 			model.addAttribute("message", message);
 			return "member/login";
 		}
