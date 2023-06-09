@@ -55,11 +55,15 @@ public class MemberController {
 	public String loginCheck(Model model, MemberVO user, HttpSession session) {
 
 		MemberVO result = ms.loginCheck(user);
+
 		if (result == null) {
 			String message = "該当する情報が一致されません。";
+
+
 			model.addAttribute("message", message);
 			return "member/login";
 		}
+
 		session.setAttribute("userInfo", result);
 		return "redirect:/";
 	}
