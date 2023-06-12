@@ -8,10 +8,10 @@
         margin-bottom: 50px;
     }
 
-    /* 버튼 스타일 */
+    /* ボタンスタイル */
     .eMail button {
-        background-color: #8FBC8F; /* 버튼 배경 색상 */
-        color: #FFFFFF; /* 버튼 텍스트 색상 */
+        background-color: #8FBC8F; /* ボタン背景色 */
+        color: #FFFFFF; /* ボタンテキスト色 */
         border: none;
         padding: 10px 20px;
         margin-top: 10px;
@@ -20,13 +20,13 @@
     }
 
     .pwfind button:hover {
-        background-color: #6B8E23; /* 마우스 호버 시 버튼 배경 색상 */
+        background-color: #6B8E23; /* マウスホバー時のボタン背景色 */
     }
     
-   /* 버튼 스타일 */
+   /* ボタンスタイル */
     .pwfind button {
-        background-color: #8FBC8F; /* 버튼 배경 색상 */
-        color: #FFFFFF; /* 버튼 텍스트 색상 */
+        background-color: #8FBC8F; /* ボタン背景色 */
+        color: #FFFFFF; /* ボタンテキスト色 */
         border: none;
         padding: 10px 20px;
         margin-top: 10px;
@@ -35,19 +35,19 @@
     }
 
     .eMail button:hover {
-        background-color: #6B8E23; /* 마우스 호버 시 버튼 배경 색상 */
+        background-color: #6B8E23; /* マウスホバー時のボタン背景色 */
     }
     
     body {
-        background-color: #E9F3E9; /* 연녹색 배경 색상 */
+        background-color: #E9F3E9; /* 黄緑背景色 */
     }
 
     h1 {
-        color: #006400; /* 제목 색상 */
+        color: #006400; /* 題目色 */
     }
 
     form {
-        background-color: #FFFFFF; /* 폼 배경 색상 */
+        background-color: #FFFFFF; /* ホーム背景色 */
         padding: 20px;
         width: 400px;
         margin: 0 auto;
@@ -56,7 +56,7 @@
     }
 
     .form-group label {
-        color: #006400; /* 라벨 색상 */
+        color: #006400; /* ラベル色 */
     }
 
     .form-group input[type="text"],
@@ -64,14 +64,14 @@
     .form-group input[type="password"] {
         width: 100%;
         padding: 10px;
-        border: 1px solid #006400; /* 입력 필드 테두리 색상 */
+        border: 1px solid #006400; /* 入力フィールド枠の色 */
         border-radius: 3px;
         outline: none;
     }
 
     .form-group button {
-        background-color: #006400; /* 버튼 배경 색상 */
-        color: #FFFFFF; /* 버튼 텍스트 색상 */
+        background-color: #006400; /* ボタン背景色 */
+        color: #FFFFFF; /* ボタンテキスト色 */
         border: none;
         padding: 10px 20px;
         margin-top: 10px;
@@ -84,7 +84,7 @@
 
 <div id="idFinddetail">
 
-	<!-- 아이디 찾기 기능 구현 -->
+	<!-- ID検索機能の具現 -->
 	<form>
 		<h1>IDを忘れた場合</h1>
 
@@ -107,7 +107,7 @@
 
 <div id="pwFinddetail">
 
-	<!-- 비밀번호 찾기 기능 구현 -->
+	<!-- 暗証番号検索機能の具現 -->
 
 	<form>
 		<h1>パスワードを忘れた場合</h1>

@@ -3,21 +3,114 @@
 .container {
   background-color: lightgreen;
   padding: 20px;
+  width: 40%;
+  height: 480px;
+  margin-left: 760px;
+  margin-right: auto;
+  margin-top: 64px;
+  border-radius: 64px;
 }
 
-.container > div {
-  margin-bottom: 10px;
+.pfInfo {
+  margin-top: 60px;
+}
+  
+.detailBtn {
+  background-color: green;
+  width: 480px;
+  padding: 16px;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
+.detailBtn:hover {
+  background-color: coral;
+}
 
-span#deleteBtn {
+span.deleteBtn {
   background-color: transparent;
   border: none;
   color: red;
   cursor: pointer;
+  display: none;
+}
+
+.infoButton {
+  position: absolute;
+  top: 300px;
+  left: 220px;
+}
+
+.memberPage {
+  position: absolute;
+  top: 256px;
+  left: 14%;
 }
 
 h1 {
   color: darkblue;
   margin-top: 20px;
+}
+
+#infopage {
+  margin-top: 12px;
+  width: 300px;
+  background-color: rgba(34,139,34,0.8);
+}
+
+#deletepage {
+  position: absolute;
+  top: 80%;
+  right: 16%;
+  width: 72px;
+  height: 32px;
+  background-color: rgba(34,139,34,0.8);
+  color: white;
+  border: none;
+  border-radius: 32px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 14px;
+}
+
+#deletepage:hover {
+  background-color: rgba(46,100,50,0.8);
+}
+
+#completeBtn {
+  position: absolute;
+  top: 80%;
+  right: 16%;
+  width: 72px;
+  height: 32px;
+  background-color: rgba(34,139,34,0.8);
+  color: white;
+  border: none;
+  border-radius: 32px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 14px;
+  display: none;
+}
+
+#completeBtn:hover {
+  background-color: rgba(46,100,50,0.8);
+}
+
+#writepage {
+  position: absolute;
+  top: 80%;
+  right: 10%;
+  width: 72px;
+  height: 32px;
+  background-color: rgba(34,139,34,0.8);
+  color: white;
+  border: none;
+  border-radius: 32px;
+  cursor: pointer;
+}
+
+#writepage:hover {
+  background-color: rgba(46,100,50,0.8);
 }

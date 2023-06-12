@@ -6,14 +6,14 @@
 <script>
 	function logout() {
 		$.ajax({
-			url : "${contextPath}/logout", // 로그아웃을 처리하는 URL
-			method : "POST", // 로그아웃 요청 방식 (GET 또는 POST)
+			url : "${contextPath}/logout", // ログアウトの処理をするURL
+			method : "POST", // ログアウトの申請方法 (GET 又は POST)
 			success : function(response) {
-				// 로그아웃 성공 시 수행할 작업
+				// ログアウトに成功した時遂行する作業
 				window.location.href = "/login"; // 로그아웃 성공 후 이동할 페이지
 			},
 			error : function(error) {
-				// 로그아웃 실패 시 수행할 작업
+				// ログアウトに失敗した時に遂行する作業
 				console.log("로그아웃 실패: " + error);
 			}
 		});
@@ -39,7 +39,7 @@
 			</a>
 		</div>
 
-		<!-- 로그인실패시 알람처리 -->
+		<!-- ログインに失敗した時のアラーム処理 -->
 		<c:choose>
 			<c:when test="${userInfo eq null}">
 				<button class="login-btn" id="login-btn">Login</button>
