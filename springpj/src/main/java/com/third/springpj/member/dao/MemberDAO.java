@@ -35,6 +35,7 @@ public interface MemberDAO {
 	@Select("select count(*) from tbl_pmember where mId = #{mId} and mEmail = #{mEmail}")
 	int findPw(MemberVO user);
 	
+	//SQL0028 - 아이디랑 이메일로 인트로 비밀번호 찾기(확인용)
 	@Select("select mPw from tbl_pmember where mId = #{mId} and mEmail = #{mEmail}")
 	String findRealpw(MemberVO user);
 	

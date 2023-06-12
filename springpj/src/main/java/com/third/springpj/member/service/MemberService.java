@@ -25,6 +25,7 @@ public interface MemberService {
 	
 	String realPw(MemberVO user);
 	
+	
 	int getPw(MemberVO user);
 	
 	// 로그인한 멤버 포트폴리오 게시물 불러오기

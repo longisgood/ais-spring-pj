@@ -91,7 +91,7 @@ public class MemberController {
 	}
 	
 	
-	
+	// パスワード探すページの情報表示
 	  @PostMapping("/pwFind")
 	  @ResponseBody 
 	  public String pwFind(MemberVO user) { 
@@ -99,7 +99,7 @@ public class MemberController {
 		  return pw;
 	  }
 	
-	
+	//Emailでパスワード探す
 	@PostMapping("/memberCheck")
 	@ResponseBody
 	public int memberCheck(MemberVO findMember) throws Exception {
