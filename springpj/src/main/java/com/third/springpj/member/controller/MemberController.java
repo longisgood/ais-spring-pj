@@ -63,6 +63,13 @@ public class MemberController {
 			model.addAttribute("message", message);
 			return "member/login";
 		}
+		if(result.getWithdraw().equals("N")){
+			String message = "該当する情報が一致されません。";
+
+
+			model.addAttribute("message", message);
+			return "member/login";
+		}
 
 		session.setAttribute("userInfo", result);
 		return "redirect:/";
