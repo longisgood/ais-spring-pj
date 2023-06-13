@@ -198,7 +198,7 @@ public class MemberController {
 		helper.setSubject("認証メールです。");
 		helper.setText("認証コード : <h3>[" + code + "]</h3>", true);
 		mailSender.send(message);
-		System.out.println("発信完了");
+		System.out.println(code);
 		return code;
 	}
 

@@ -19,12 +19,12 @@ public class ServiceAdvice {
 	public Object checkService(ProceedingJoinPoint pjp) throws Throwable {
 		// 전처리
 		log.info("================= START =================");
-		log.info("--- 실행 클래스 : " + pjp.getTarget());
-		log.info("--- 실행 메소드 : " + pjp.getSignature().getName());
-		log.info("--- 입력 값 : " + Arrays.toString(pjp.getArgs()));
+		log.info("--- 実行　クラス : " + pjp.getTarget());
+		log.info("--- 実行　メソッド : " + pjp.getSignature().getName());
+		log.info("--- 入力値 : " + Arrays.toString(pjp.getArgs()));
 		Object o = pjp.proceed(); // 실제 메소드 실행부분
 		// 후처리
-		log.info("--- 반환 값  :" + o);
+		log.info("--- 返還値  :" + o);
 		log.info("================== END ==================");
 		return o;
 	}

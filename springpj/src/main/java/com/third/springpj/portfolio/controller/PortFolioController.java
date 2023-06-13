@@ -44,7 +44,7 @@ public class PortFolioController {
 
 		String msg = "作成した文書が登録できました。";
 
-		rttr.addFlashAttribute("message",msg);
+		rttr.addFlashAttribute("msg",msg);
 
 		return "redirect:/member/mypage";
 	}

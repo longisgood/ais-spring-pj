@@ -34,8 +34,10 @@
 		<p>
 			詳細内容<input type="text" value="${port.PText}" readonly>
 		</p>
-		<button id="modifyBtn" type="submit">修正</button>
-		<button id="deleteBtn" type="submit">削除</button>
+		<c:if test="${userInfo ne null && userInfo.MId eq port.MId}">
+			<button id="modifyBtn" type="submit">修正</button>
+			<button id="deleteBtn" type="submit">削除</button>
+		</c:if>
 		<form id="delete" action="delete" method="get">
 			<input type="hidden" id="pNum" name="pNum" value="${port.PNum}">
 		</form>
