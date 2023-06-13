@@ -55,6 +55,11 @@
 	var emailcode = "";
 
 	$("#reduplication_check").click(function() {
+		if($("#mId").val() == null || $("#mId").val() == "" || $("#mId").val() == undefined){
+			swal("不可能", "IDを入力してください。", "info");
+			$('#mId').focus();
+			return;
+		}
 		$.ajax({
 			url : "idCheck",
 			type : "POST",
