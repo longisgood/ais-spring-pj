@@ -7,12 +7,12 @@
 <section class="container">
 	<div class="pfInfo">
 		<c:forEach items="${portfolio}" var="item">
-			<form clas="group" id="group_${item.PNum}" action="${contextPath}/portfolio/detail" method="get">
+			<form class="group" id="group_${item.PNum}" action="${contextPath}/portfolio/detail" method="get">
 				<input type="hidden" id="pNum" name="pNum" value="${item.PNum}">
-				<button class="detailBtn" id="detailBtn_${item.PNum}">${item.PTitle}</button>
-				<span class="deleteBtn" id="${item.PNum}_deleteBtn">X</span>
+				<button class="detailBtn" id="detailBtn_${item.PNum}" >${item.PTitle}</button>
+				<span class="deleteBtn" id="${item.PNum}" >X</span>
 			</form>
-			<form class="deleteP" id="deleteP_${item.PNum}" action="deleteP" method="get">
+			<form class="deleteP${item.PNum}" id="deleteP_${item.PNum}" action="deleteP" method="get">
 				<input type="hidden" id="pNum" name="pNum" value="${item.PNum}">
 			</form>
 		</c:forEach>
@@ -43,7 +43,8 @@
 	});
 	
 	$('.deleteBtn').click(function() {
-		$('.deleteP').submit();
+		var parameter = $(this).attr('id');
+		$('.deleteP'+parameter+'').submit(); 
 	});
 	
 	$("#infopage").click(function(){

@@ -88,6 +88,7 @@
 <section>
 <div class="container">
     <h1>Login</h1>
+    
     <form action="loginCheck" method="POST">
       <div class="form-group">
         <label for="username">ID</label><br>
