@@ -7,7 +7,7 @@
 	<form id="joinform" action="register" method="POST">
 		<div class="input-row" >
 			<input type="text" class="id" id="mId" name="mId"
-				placeholder="ID重複確認をしてください。"> <input type="button"
+				placeholder="IDが重複していないか確認してください。"> <input type="button"
 				class="button" value="ID重複確認" id="reduplication_check"> <input
 				type="hidden" value="N" id="reduCkConfirm">
 		</div>
@@ -69,10 +69,10 @@
 			},
 			success : function(data) {
 				if (data == 1) {
-					swal("不可能", "同じIDが存在います。", "info");
+					swal("不可能", "既に使用されているIDです", "info");
 					$("#mId").val("");
 				} else {
-					swal("可能", "使用してもいいIDです。", "info");
+					swal("可能", "使用可能なIDです。", "info");
 					$("#reduCkConfirm").attr("value", "Y");
 				}
 			}
@@ -89,7 +89,7 @@
 				$('#confirm').html('パスワードが一致しません。.');
 				$('#confirm').attr('color', 'red');
 			} else {
-				$('#confirm').html('パスワードが一致します。');
+				$('#confirm').html('パスワード一致！');
 				$('#confirm').attr('color', 'blue');
 			}
 		});
@@ -122,14 +122,14 @@
 								emailcode = code;
 								$("#code").show();
 								$("#codeCheck").show();
-								swal('完了','認証番号を送りました。','success')
+								swal('完了','認証番号を送信しました。','success')
 							}else{
-								swal('Error',"エーラが発生しました。",'error')
+								swal('Error',"エラーが発生しました。",'error')
 							}
 						}
 					})
 				}else{
-					swal('禁止','一致するEmailが存在します。','warning')
+					swal('禁止','使用済みのEmailが存在します。','warning')
 					
 				}
 			}
@@ -139,9 +139,9 @@
 	$('#codeCheck').click(function(){
 		if($('#code').val() == emailcode){
 			$('#codeConfirm').val('Y');
-			swal("完了","確認できました。","success")
+			swal("完了","確認完了","success")
 		}else{
-			swal('確認要望','コードが違います。',"warning")
+			swal('確認要望','コードが一致しません',"warning")
 		}
 	})
 		
@@ -169,7 +169,7 @@
 				return;
 			}
 			if (idCheck == "" || idCheck == "N") {
-				swal("不可能", "ID重複確認をしてください。", "info");
+				swal("不可能", "IDが重複してないか確認してください。", "info");
 				$('#reduCkConfirm').focus();
 				return;
 			}
@@ -179,7 +179,7 @@
 				return;
 			}
 			if (valPass != valCPass) {
-				swal("不可能", "パスワードが一致されません。", "waring");
+				swal("不可能", "パスワードが一致しません。", "waring");
 				$('#mPw').val("");
 				$('#mPwCheck').val("");
 				$('#mPw').focus();
@@ -198,7 +198,7 @@
 			}
 
 			if (!$('#male').is(':checked') && !$('#female').is(':checked')) {
-				swal("不可能", "性別を確認してください。", "info");
+				swal("不可能", "性別を選択してください。", "info");
 				return;
 			}
 			if (emailCheck == "" || emailCheck == "N") {
