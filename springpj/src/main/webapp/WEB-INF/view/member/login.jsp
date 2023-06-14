@@ -12,6 +12,10 @@
     margin-top: 64px;
     border-radius: 64px;
   }
+
+  h1 {
+    color: black;
+  }
   
   #mId {
     width: 140px;
@@ -37,7 +41,7 @@
   #idFind {
     position: absolute;
     top: 270px;
-    left: 714px;
+    left: 702px;
   }
   
   #idFind:hover {
@@ -48,7 +52,7 @@
   #pwFind {
     position: absolute;
     top: 400px;
-    left: 680px;
+    left: 670px;
   }
   
   #pwFind:hover {
