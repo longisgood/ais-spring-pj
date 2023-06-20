@@ -72,6 +72,7 @@ public class MemberController {
 		}
 
 		session.setAttribute("userInfo", result);
+		session.setMaxInactiveInterval(3600);
 		return "redirect:/";
 	}
 

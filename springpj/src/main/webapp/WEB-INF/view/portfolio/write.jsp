@@ -58,7 +58,7 @@ $("#submitBtn").click(function(){
     }
 	
 	if(titleCheck == null || titleCheck == undefined || titleCheck == ""){
-		alert('タイトルを入力してください。')
+		swal('入力お願い','タイトルを入力してください。','info')
 		$('#pTitle').focus(); 
 		return;
 	}
