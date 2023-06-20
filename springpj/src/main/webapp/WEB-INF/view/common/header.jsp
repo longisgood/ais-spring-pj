@@ -24,6 +24,7 @@
 <meta charset="UTF-8">
 <link href="${contextPath}/css/style.css" rel="stylesheet"
 	type="text/css">
+<link rel="icon" href="data:,">
 <script src="https://code.jquery.com/jquery-3.7.0.js"
 	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
 	crossorigin="anonymous"></script>
